@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+    <font android:font="@font/nblack"/>
+    <font android:font="@font/nbold"/>
+    <font android:font="@font/nlight"/>
+    <font android:font="@font/nmedium"/>
+    <font android:font="@font/nregular"/>
+    <font android:font="@font/nthin"/>
+</font-family>

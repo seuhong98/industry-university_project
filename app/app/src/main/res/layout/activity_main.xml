@@ -1,18 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- 공백 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="30">
 
-</android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:gravity="center">
+
+        <!-- 로고 -->
+        <ImageView
+            android:id="@+id/ourLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            tools:srcCompat="@tools:sample/avatars"
+            />
+
+    </LinearLayout>
+
+    <!-- 링크 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="50"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8">
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="84"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="50"
+                android:gravity="bottom">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="회원이신가요?"
+                    android:textSize="12pt"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/nbold">
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="45"
+                android:orientation="vertical">
+
+
+                <Button
+                    android:gravity="left"
+                    android:id="@+id/logininPage"
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:background="#00FF0000"
+                    android:text="로그인하기 >"
+                    android:textSize="12pt"
+                    android:fontFamily="@font/nbold"
+                    android:textColor="@color/blue"
+                    >
+                </Button>
+
+                <Button
+                    android:id="@+id/singupPage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#00FF0000"
+                    android:text="회원가입하기 >"
+                    android:textSize="12pt"
+                    android:textAlignment="textStart"
+                    android:fontFamily="@font/nbold"
+                    android:textColor="@color/red">
+                </Button>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8">
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
