@@ -2,3 +2,4 @@
 회의 파일/.DS_Store
 회의 파일/.DS_Store
 app/app/src/main/java/com/dongseung/studioapartmentreview/Common.java
+API_Server/src/main/resources/application.properties
