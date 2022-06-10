@@ -1,6 +1,6 @@
 package com.oc.api_server.Repository;
 
-import com.oc.api_server.VO.OcUser;
+import com.oc.api_server.VO.OrUser;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.EntityManager;
@@ -19,7 +19,7 @@ public class UserRepository{
 
     public boolean CreateUser(String nickName, String PW, String Email) {
         try {
-            OcUser user = new OcUser(nickName,Email,encoder.encode(PW));
+            OrUser user = new OrUser(nickName,Email,encoder.encode(PW));
             em.persist(user);
             return true;
         }catch (Exception e){
@@ -42,7 +42,7 @@ public class UserRepository{
         return false;
     }
 
-    public OcUser findByNickname(String nickname){
-        return em.createQuery("select oc from OcUser oc where oc.nickname = :nickname", OcUser.class).setParameter("nickname",nickname).getSingleResult();
+    public OrUser findByNickname(String nickname){
+        return em.createQuery("select oc from OrUser oc where oc.nickname = :nickname", OrUser.class).setParameter("nickname",nickname).getSingleResult();
     }
 }

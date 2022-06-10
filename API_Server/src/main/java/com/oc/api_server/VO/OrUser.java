@@ -10,16 +10,16 @@ import javax.persistence.Id;
 
 @Entity
 @Getter @Setter
-public class OcUser {
+public class OrUser {
+    String nickname; //닉네임
     @Id
     @Column(length = 125)
-    String nickname;
-    String email;
-    String pw;
+    String email; //이메일
+    String pw; //비밀번호
 
-    public OcUser() {}
+    public OrUser() {}
 
-    public OcUser(String nickname , String email , String pw){
+    public OrUser(String nickname , String email , String pw){
         this.nickname = nickname;
         this.email = email;
         this.pw = pw;

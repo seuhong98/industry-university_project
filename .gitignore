@@ -4,3 +4,4 @@
 app/app/src/main/java/com/dongseung/studioapartmentreview/Common.java
 API_Server/src/main/resources/application.properties
 API_Server/src/test/**
+API_Server/src/main/java/Secure/Secure.java
