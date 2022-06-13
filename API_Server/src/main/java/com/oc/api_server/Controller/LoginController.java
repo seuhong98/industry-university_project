@@ -1,16 +1,33 @@
 package com.oc.api_server.Controller;
 
+import com.oc.api_server.Service.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/Login")
 public class LoginController {
 
-    @RequestMapping("/SignIn")
+    private final UserService uService;
+
+    public LoginController(UserService uService) {
+        this.uService = uService;
+    }
+
+    @PostMapping("/SignIn")
     @ResponseBody
-    public String SignIn(String ID, String Pw, String Email){
-        return "";
+    public String SignIn(String ID, String Pw, String Email, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        if((boolean)session.getAttribute("MailCertificationPass")){
+            uService.SignIn(ID,Pw,Email);
+            return "true";
+        }else{
+            return "";
+        }
     }
 }

@@ -2,9 +2,13 @@ package com.oc.api_server.Config;
 
 import com.oc.api_server.Repository.UserRepository;
 import com.oc.api_server.Repository.BoardRepository;
+import com.oc.api_server.Service.CertificationService;
 import com.oc.api_server.Service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -16,6 +20,10 @@ public class MainConfig {
 
     @PersistenceContext
     private EntityManager em;
+
+    @Autowired
+    private JavaMailSender emailSender;
+
 
 
     @Bean
@@ -32,9 +40,13 @@ public class MainConfig {
         return new UserRepository(em,passwordEncoder());
     }
 
-
     @Bean
     public UserService userService(){
         return new UserService(userRepository());
+    }
+
+    @Bean
+    public CertificationService certificationService(){
+        return new CertificationService(emailSender);
     }
 }
