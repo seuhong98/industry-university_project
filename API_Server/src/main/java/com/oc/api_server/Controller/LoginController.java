@@ -23,11 +23,15 @@ public class LoginController {
     @ResponseBody
     public String SignIn(String ID, String Pw, String Email, HttpServletRequest request){
         HttpSession session = request.getSession();
-        if((boolean)session.getAttribute("MailCertificationPass")){
-            uService.SignIn(ID,Pw,Email);
-            return "true";
-        }else{
-            return "";
+        try{
+            if((boolean)session.getAttribute("MailCertificationPass")){
+                uService.SignIn(ID,Pw,Email);
+                return "TRUE";
+            }else{
+                return "Need_mailCertification";
+            }
+        }catch (Exception e){
+            return "ERR";
         }
     }
 }

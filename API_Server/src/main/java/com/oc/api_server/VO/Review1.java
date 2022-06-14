@@ -1,6 +1,7 @@
 package com.oc.api_server.VO;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.Id;
  */
 @Entity
 @Getter @Setter
+@NoArgsConstructor
 public class Review1 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,4 +32,8 @@ public class Review1 {
     byte owner; //집주인 대응
     byte convenience; //편의시실(정수기, 대형세탁기 등등)
     byte total; //전체적인 점수
+
+    String review_owner;//글쓴이
+    int point; //이 글로 얻은 포인트 인증글로 변환시 지금까지 얻은 포인트 더 얻음
+    boolean is_verification; //검증 되었는가 확인 true : 검즘됨, false : 검증 안됨 --> 계약서로
 }

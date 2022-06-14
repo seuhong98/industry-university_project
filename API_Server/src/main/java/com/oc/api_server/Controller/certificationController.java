@@ -31,11 +31,15 @@ public class certificationController {
     public String MailCertification(String to, HttpServletRequest request){
         HttpSession session = request.getSession();
         String get = service.sendCertificationEmail(to);
-        if(get.length()==0){
-            return "error";
-        }else{
-            session.setAttribute("Mail",get);
-            return get;
+        try{
+            if(get.length()==0){
+                return "error_code_null";
+            }else{
+                session.setAttribute("Mail",get);
+                return "TRUE";
+            }
+        }catch (Exception e){
+            return "ERR";
         }
     }
 
@@ -44,12 +48,16 @@ public class certificationController {
     @ResponseBody
     public String MailCertificationResponse(String input, HttpServletRequest request){
         HttpSession session = request.getSession();
-        if(session.getAttribute("Mail").equals(input)){
-            session.removeAttribute("Mail");
-            session.setAttribute("MailCertificationPass",true);
-            return "true";
-        }else{
-            return "false";
+        try {
+            if(session.getAttribute("Mail").equals(input)){
+                session.removeAttribute("Mail");
+                session.setAttribute("MailCertificationPass",true);
+                return "TRUE";
+            }else{
+                return "FALSE";
+            }
+        }catch (Exception e){
+            return "ERR";
         }
     }
 
