@@ -36,14 +36,6 @@ public class MainConfig {
     //레포지토리=========================================================================================================
 
     @Bean
-    public Review1Repository review1Repository(){
-        return new Review1Repository(em);
-    }
-    @Bean
-    public Review2Repository review2Repository(){
-        return new Review2Repository(em);
-    }
-    @Bean
     public UserRepository userRepository(){
         return new UserRepository(em,passwordEncoder());
     }
@@ -62,11 +54,11 @@ public class MainConfig {
 
     @Bean
     public Review1Service review1Service(){
-        return new Review1Service(review1Repository());
+        return new Review1Service();
     }
 
     @Bean
     public Review2Service review2Service(){
-        return new Review2Service(review2Repository());
+        return new Review2Service();
     }
 }

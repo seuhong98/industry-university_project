@@ -1,28 +1,61 @@
 package com.oc.api_server.Repository;
 
+import com.oc.api_server.VO.Review1;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import javax.persistence.EntityManager;
+import java.util.List;
 
-public class Review1Repository {
+public interface Review1Repository extends JpaRepository<Review1,Long> {
+    @Override
+    List<Review1> findAll();
 
-    private EntityManager em;
-    public Review1Repository(EntityManager em){
-        this.em = em;
+    @Override
+    List<Review1> findAll(Sort sort);
+
+    @Override
+    List<Review1> findAllById(Iterable<Long> longs);
+
+    @Override
+    <S extends Review1> List<S> saveAll(Iterable<S> entities);
+
+    @Override
+    void flush();
+
+    @Override
+    <S extends Review1> S saveAndFlush(S entity);
+
+    @Override
+    <S extends Review1> List<S> saveAllAndFlush(Iterable<S> entities);
+
+    @Override
+    default void deleteInBatch(Iterable<Review1> entities) {
+        JpaRepository.super.deleteInBatch(entities);
     }
 
+    @Override
+    void deleteAllInBatch(Iterable<Review1> entities);
 
-    public boolean CreateBoard() {
-        return false;
-    }
+    @Override
+    void deleteAllByIdInBatch(Iterable<Long> longs);
 
-    public boolean RemoveBoard() {
-        return false;
-    }
+    @Override
+    void deleteAllInBatch();
 
-    public boolean UpdateBoard() {
-        return false;
-    }
+    @Override
+    Review1 getOne(Long aLong);
 
-    public boolean DeleteBoard() {
-        return false;
-    }
+    @Override
+    Review1 getById(Long aLong);
+
+    @Override
+    Review1 getReferenceById(Long aLong);
+
+    @Override
+    <S extends Review1> List<S> findAll(Example<S> example);
+
+    @Override
+    <S extends Review1> List<S> findAll(Example<S> example, Sort sort);
 }
