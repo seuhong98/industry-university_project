@@ -3,11 +3,14 @@ package com.oc.api_server.VO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 
 /**
@@ -36,4 +39,10 @@ public class Review1 {
     String review_owner;//글쓴이
     int point; //이 글로 얻은 포인트 인증글로 변환시 지금까지 얻은 포인트 더 얻음
     boolean is_verification; //검증 되었는가 확인 true : 검즘됨, false : 검증 안됨 --> 계약서로
+
+    @CreatedDate
+    private LocalDateTime createdDate; //생성 시간
+
+    @LastModifiedDate
+    private LocalDateTime modifiedDate; //수정 시간
 }

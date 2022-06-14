@@ -2,10 +2,10 @@ package com.oc.api_server.Repository;
 
 import javax.persistence.EntityManager;
 
-public class BoardRepository {
+public class Review1Repository {
 
     private EntityManager em;
-    public BoardRepository(EntityManager em){
+    public Review1Repository(EntityManager em){
         this.em = em;
     }
 
@@ -14,11 +14,9 @@ public class BoardRepository {
         return false;
     }
 
-
     public boolean RemoveBoard() {
         return false;
     }
-
 
     public boolean UpdateBoard() {
         return false;

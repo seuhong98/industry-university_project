@@ -1,14 +1,16 @@
 package com.oc.api_server.Config;
 
+import com.oc.api_server.Repository.Review2Repository;
 import com.oc.api_server.Repository.UserRepository;
-import com.oc.api_server.Repository.BoardRepository;
+import com.oc.api_server.Repository.Review1Repository;
+import com.oc.api_server.Service.Review1Service;
 import com.oc.api_server.Service.CertificationService;
+import com.oc.api_server.Service.Review2Service;
 import com.oc.api_server.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -18,27 +20,35 @@ import javax.persistence.PersistenceContext;
 @Configuration
 public class MainConfig {
 
+    //소스=========================================================================================================
+
     @PersistenceContext
     private EntityManager em;
 
     @Autowired
     private JavaMailSender emailSender;
 
-
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    //레포지토리=========================================================================================================
+
     @Bean
-    public com.oc.api_server.Repository.BoardRepository boardRepository(){
-        return new BoardRepository(em);
+    public Review1Repository review1Repository(){
+        return new Review1Repository(em);
+    }
+    @Bean
+    public Review2Repository review2Repository(){
+        return new Review2Repository(em);
     }
     @Bean
     public UserRepository userRepository(){
         return new UserRepository(em,passwordEncoder());
     }
+
+    //서비스=========================================================================================================
 
     @Bean
     public UserService userService(){
@@ -48,5 +58,15 @@ public class MainConfig {
     @Bean
     public CertificationService certificationService(){
         return new CertificationService(emailSender);
+    }
+
+    @Bean
+    public Review1Service review1Service(){
+        return new Review1Service(review1Repository());
+    }
+
+    @Bean
+    public Review2Service review2Service(){
+        return new Review2Service(review2Repository());
     }
 }
