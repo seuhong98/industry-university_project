@@ -5,16 +5,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter @Setter
 @NoArgsConstructor
 public class OrUser {
-    String nickname; //닉네임
+
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    long id;
+
+    String nickname; //닉네임
     @Column(length = 125)
     String email; //이메일
     String pw; //비밀번호

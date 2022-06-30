@@ -10,9 +10,18 @@ public class UserService {
         this.ur = userRepository;
     }
 
+    /**
+     * 로그인 요청
+     * @param nickName 닉네임
+     * @param PW 비밀번호
+     * @param Email 이메일
+     * @return
+     */
     public boolean SignIn(String nickName, String PW, String Email){
         ur.CreateUser(nickName,PW,Email);
         return false;
     }
+
+
 
 }

@@ -3,10 +3,7 @@ package com.oc.api_server.Config;
 import com.oc.api_server.Repository.Review2Repository;
 import com.oc.api_server.Repository.UserRepository;
 import com.oc.api_server.Repository.Review1Repository;
-import com.oc.api_server.Service.Review1Service;
-import com.oc.api_server.Service.CertificationService;
-import com.oc.api_server.Service.Review2Service;
-import com.oc.api_server.Service.UserService;
+import com.oc.api_server.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -63,5 +60,10 @@ public class MainConfig {
     @Bean
     public Review2Service review2Service(){
         return new Review2Service();
+    }
+
+    @Bean
+    Security security(){
+        return new Security();
     }
 }

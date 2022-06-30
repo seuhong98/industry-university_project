@@ -34,4 +34,17 @@ public class LoginController {
             return "ERR";
         }
     }
+
+    @PostMapping("/SignIn")
+    @ResponseBody
+    public String SignIn(String Pw, String Email, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        try{
+
+            return "TRUE";
+        }catch (Exception e){
+            return "ERR";
+        }
+    }
+
 }

@@ -30,7 +30,10 @@ public class certificationController {
     @ResponseBody
     public String MailCertification(String to, HttpServletRequest request){
         HttpSession session = request.getSession();
-        String get = service.sendCertificationEmail(to);
+        if(!(to.split("@")[1].equals("kangwon.ac.kr"))){
+            return "no_uni";
+        }
+        String get = service.sendCertificationEmail(to); //인증 번호 보내고 그 번호 받아오기
         try{
             if(get.length()==0){
                 return "error_code_null";
