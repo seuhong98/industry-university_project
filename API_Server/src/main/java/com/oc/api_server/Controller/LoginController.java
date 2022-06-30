@@ -19,9 +19,9 @@ public class LoginController {
         this.uService = uService;
     }
 
-    @PostMapping("/SignIn")
+    @PostMapping("/Signup")
     @ResponseBody
-    public String SignIn(String ID, String Pw, String Email, HttpServletRequest request){
+    public String SignUp(String ID, String Pw, String Email, HttpServletRequest request){
         HttpSession session = request.getSession();
         try{
             if((boolean)session.getAttribute("MailCertificationPass")){

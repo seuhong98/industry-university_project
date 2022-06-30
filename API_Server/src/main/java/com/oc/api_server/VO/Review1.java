@@ -34,7 +34,14 @@ public class Review1 {
     byte sound; //주변 소음
     byte owner; //집주인 대응
     byte convenience; //편의시실(정수기, 대형세탁기 등등)
+    byte size; //방크기
     byte total; //전체적인 점수
+
+    int guarantee; //보증금
+    boolean price; //t-> 월세_반전세 f -> 전세
+    int money; //금액
+
+
 
     String review_owner;//글쓴이
     int point; //이 글로 얻은 포인트 인증글로 변환시 지금까지 얻은 포인트 더 얻음
