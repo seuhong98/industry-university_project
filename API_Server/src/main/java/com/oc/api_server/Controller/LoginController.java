@@ -38,8 +38,10 @@ public class LoginController {
     @PostMapping("/SignIn")
     @ResponseBody
     public String SignIn(String Pw, String Email, HttpServletRequest request){
+        request.getSession(true);
         HttpSession session = request.getSession();
         try{
+
 
             return "TRUE";
         }catch (Exception e){

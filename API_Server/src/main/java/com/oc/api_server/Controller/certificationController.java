@@ -47,6 +47,12 @@ public class certificationController {
     }
 
 
+    /**
+     *
+     * @param input 폰에서 넣은 번호
+     * @param request
+     * @return
+     */
     @PostMapping("/mailResponse")
     @ResponseBody
     public String MailCertificationResponse(String input, HttpServletRequest request){
