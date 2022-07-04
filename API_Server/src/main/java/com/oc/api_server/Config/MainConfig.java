@@ -35,12 +35,12 @@ public class MainConfig {
 
     @Bean
     public UserService userService(){
-        return new UserService(userRepository());
+        return new UserService(userRepository(),security());
     }
 
     @Bean
     public CertificationService certificationService(){
-        return new CertificationService(emailSender, userRepository());
+        return new CertificationService(emailSender, userRepository(),security());
     }
 
     @Bean

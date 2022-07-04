@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 
 @Transactional
@@ -20,7 +21,7 @@ public class UserRepository{
 
     public boolean CreateUser(String nickName, String PW, String Email) {
         try {
-            OrUser user = new OrUser(nickName,Email,security.makeOneWayEncrypt(PW));
+            OrUser user = new OrUser(nickName,Email,PW);
             em.persist(user);
             return true;
         }catch (Exception e){
@@ -28,32 +29,22 @@ public class UserRepository{
         }
     }
 
-
-    public boolean RemoveUser() {
-        return false;
-    }
-
-
     public boolean UpdateUser() {
         return false;
     }
 
 
-    public boolean DeleteUser() {
-        return false;
+    public void DeleteUser(String Email) {
+        em.remove(findByEmail(Email).get());
     }
 
-    public boolean isUser(String Email, String pw){
-        OrUser read  =em.createQuery("select oc from OrUser oc where oc.email = :Email", OrUser.class).setParameter("Email",Email).getSingleResult();
-        if(security.match(pw,read.getPw())){
-            return true;
-        }else{
-            return false;
-        }
+    public Optional<OrUser> findByEmail(String Email){
+        return Optional.ofNullable(em.createQuery("select oc from OrUser oc where oc.email = :Email", OrUser.class).setParameter("Email",Email).getSingleResult());
     }
 
-    public OrUser findByNickname(String nickname){
-        return em.createQuery("select oc from OrUser oc where oc.nickname = :nickname", OrUser.class).setParameter("nickname",nickname).getSingleResult();
+    public void SetNickName(long id,String Want){
+        OrUser read = em.find(OrUser.class,id);
+        read.setNickname(Want);
     }
 
 

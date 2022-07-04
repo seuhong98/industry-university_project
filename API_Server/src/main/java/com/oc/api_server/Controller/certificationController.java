@@ -29,11 +29,17 @@ public class certificationController {
     @PostMapping("/mail")
     @ResponseBody
     public String MailCertification(String to, HttpServletRequest request){
+        String get = null;
         HttpSession session = request.getSession();
         if(!(to.split("@")[1].equals("kangwon.ac.kr"))){
             return "no_uni";
+        }else{
+            if(service.CheckIsUniqueEmail(to)){
+                get = service.sendCertificationEmail(to); //인증 번호 보내고 그 번호 받아오기
+            }else{
+                return "ist_unique";
+            }
         }
-        String get = service.sendCertificationEmail(to); //인증 번호 보내고 그 번호 받아오기
         try{
             if(get.length()==0){
                 return "error_code_null";

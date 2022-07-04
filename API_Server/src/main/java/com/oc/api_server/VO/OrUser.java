@@ -18,7 +18,7 @@ public class OrUser {
     long id;
 
     String nickname; //닉네임
-    @Column(length = 125)
+    @Column(length = 125,unique = true)
     String email; //이메일
     String pw; //비밀번호
 

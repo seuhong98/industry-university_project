@@ -1,8 +1,11 @@
 package com.oc.api_server.Service;
 
 import com.oc.api_server.Repository.UserRepository;
+import com.oc.api_server.VO.OrUser;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+
+import java.util.Optional;
 import java.util.Random;
 
 public class CertificationService {
@@ -10,11 +13,14 @@ public class CertificationService {
     private JavaMailSender emailSender;
     private Random random = new Random();
 
+    private final Security security;
+
     private final UserRepository userRepository;
 
-    public CertificationService(JavaMailSender emailSender, UserRepository userRepository) {
+    public CertificationService(JavaMailSender emailSender, UserRepository userRepository,Security security) {
         this.emailSender = emailSender;
         this.userRepository = userRepository;
+        this.security = security;
     }
 
     public boolean SendEmail(String to,String title,String Text){
@@ -54,7 +60,7 @@ public class CertificationService {
     }
 
     public boolean CheckIsUniqueEmail(String Email){
-
+        return userRepository.findByEmail(security.TwoWayEncrypt(Email)).isPresent();
     }
 
 }
