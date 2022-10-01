@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.oc.api_server.Repository.UserRepository">
+    <insert id="CreateUser">
+        INSERT INTO or_user  (id,nickname,email,pw)
+            VALUES (NEXT VALUE FOR user_id,#{nickname},#{email},#{pw});
+    </insert>
+
+    <delete id="DeleteUser">
+        DELETE FROM or_user WHERE email = #{email};
+    </delete>
+
+    <select id="findByEmail" resultType="OrUser">
+        SELECT * FROM or_user WHERE email = #{email};
+    </select>
+
+    <update id="SetNickName">
+        UPDATE or_user set nickname = #{want} WHERE id= #{id};
+    </update>
+
+    <update id="SetEmail">
+        UPDATE or_user set email = #{want} WHERE id= #{id};
+    </update>
+
+    <update id="SetPw">
+        UPDATE or_user set pw = #{want} WHERE id= #{id};
+    </update>
+</mapper>

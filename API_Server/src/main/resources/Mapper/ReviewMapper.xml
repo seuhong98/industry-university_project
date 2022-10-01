@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.oc.api_server.Repository.ReviewRepository">
+    <select id="getList" resultType="SimpleReview">
+        SELECT r.id, r.title, r.preview as simple_main, is_image FROM review r Order by id DESC LIMIT 10
+    </select>
+
+    <select id="getListContinue" resultType="SimpleReview">
+        <![CDATA[
+        SELECT r.id, r.title, r.preview as simple_main, is_image FROM review r WHERE r.id <  #{last} Order by id DESC LIMIT 10
+        ]]>
+    </select>
+
+    <insert id="SaveReview" parameterType="Review">
+        insert into review
+        values
+            (
+                NEXT VALUE FOR review_id,
+
+                     #{title},
+                     #{main},
+
+                     #{preview},
+                     #{is_image},
+
+                     #{address},
+                     #{x},
+                     #{y},
+
+                     #{guarantee},
+                     #{price},
+                     #{money},
+                     #{management},
+
+                     #{good},
+
+                     #{review_owner},
+                     #{total},
+
+                     now(),
+                     now()
+
+            )
+    </insert>
+</mapper>

@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Main.MainActivity">
+    <!-- todo review1-디자인 깨끗하게 다시 해야함 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="100">
+
+        <!-- todo 뒤로가기, 저장 버튼 생성 할 곳 -->
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10">
+
+            <EditText
+                android:id="@+id/review1Title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="제목"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            android:weightSum="100"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="35"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="총 별점">
+
+                </TextView>
+            </LinearLayout>
+            <RatingBar
+                android:id="@+id/review1Total"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="60"
+                android:stepSize="0.5">
+
+            </RatingBar>
+
+        </LinearLayout>
+
+        <!-- todo 제목 쓰는 곳 -->
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:weightSum="100"
+            android:orientation="vertical">
+
+
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="40"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RadioButton
+                    android:id="@+id/is_monthlyR"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="월세">
+
+                </RadioButton>
+
+                <RadioButton
+                    android:id="@+id/is_charterR"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="전세">
+
+                </RadioButton>
+
+            </RadioGroup>
+
+            <!-- 월세 -->
+            <LinearLayout
+                android:id="@+id/is_monthly"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="60"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/Guarantee0"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:hint="보증금">
+
+                </EditText>
+
+                <EditText
+                    android:id="@+id/money0"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:hint="월세">
+
+                </EditText>
+
+
+            </LinearLayout>
+
+            <!-- 월세 -->
+            <LinearLayout
+                android:id="@+id/is_charter"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="60"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/Guarantee1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:hint="전세금">
+
+                </EditText>
+
+                <EditText
+                    android:id="@+id/management1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:hint="관리비">
+
+                </EditText>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="62"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="100"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    >
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/review1Layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="90"
+                    android:overScrollMode="always"
+                    android:orientation="vertical"
+                    android:padding="0dp"
+                    android:layout_margin="0dp">
+
+                    <EditText
+                        android:id="@+id/review1Text0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="리뷰를 작성해주세요"/>
+
+                    <ImageView
+                        android:id="@+id/review1Image0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:adjustViewBounds="true"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/review1Text1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/review1Image1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:adjustViewBounds="true"
+                        android:visibility="gone"/>
+
+
+                    <EditText
+                        android:id="@+id/review1Text2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/review1Image2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:adjustViewBounds="true"
+                        android:visibility="gone"/>
+
+
+                    <EditText
+                        android:id="@+id/review1Text3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/review1Image3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:adjustViewBounds="true"
+                        android:visibility="gone"/>
+
+
+                    <EditText
+                        android:id="@+id/review1Text4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/review1Image4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:adjustViewBounds="true"
+                        android:visibility="gone"/>
+
+
+                    <EditText
+                        android:id="@+id/review1Text5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/review1Image5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:adjustViewBounds="true"
+                        android:visibility="gone"/>
+
+
+                    <EditText
+                        android:id="@+id/review1Text6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/review1Image6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:adjustViewBounds="true"
+                        android:visibility="gone"/>
+
+
+                    <EditText
+                        android:id="@+id/review1Text7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/review1Image7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:adjustViewBounds="true"
+                        android:visibility="gone"/>
+
+
+                    <EditText
+                        android:id="@+id/review1Text8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/review1Image8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:adjustViewBounds="true"
+                        android:visibility="gone"/>
+
+
+                    <EditText
+                        android:id="@+id/review1Text9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/review1Image9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:adjustViewBounds="true"
+                        android:visibility="gone"/>
+
+
+                    <EditText
+                        android:id="@+id/review1Text10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/review1Image10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:adjustViewBounds="true"
+                        android:visibility="gone"/>
+
+
+                    <EditText
+                        android:id="@+id/review1Text11"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+
+
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5">
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <!-- todo 조작 하는 공간 사진 추가 버튼 등등 -->
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10">
+
+            <Button
+                android:id="@+id/review1LoadImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사진 넣기">
+
+
+            </Button>
+
+            <Button
+                android:id="@+id/review1Save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="리뷰 저장">
+
+
+            </Button>
+
+            <Button
+                android:id="@+id/review1findAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="위치 찾기">
+
+
+            </Button>
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.LinearLayoutCompat>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.app.or">
+
+    <!-- 외부 저장소 읽기 쓰기 권한 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.OR"
+        tools:targetApi="31"
+        android:usesCleartextTraffic="true"
+
+        android:requestLegacyExternalStorage="true"
+
+        >
+
+        <meta-data android:name="com.kakao.sdk.AppKey"
+                   android:value="b08b97a83b079dbadd8cf3430793540e"/>
+
+        <activity
+            android:name=".Activity.Stater"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+
+
+        <activity
+            android:name=".Activity.Login.Login"
+            android:exported="true">
+        </activity>
+
+
+
+
+        <activity
+            android:name=".Activity.Main.MainActivity"
+            android:exported="true">
+        </activity>
+
+
+
+        <activity
+            android:name=".Activity.Review.Review1WriteActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+
+        <activity
+            android:name=".Activity.KakaoAPI.FindAddress"
+            android:exported="true">
+        </activity>
+
+
+    </application>
+
+</manifest>
