@@ -99,7 +99,7 @@ public class Review1WriteActivity extends AppCompatActivity {
 
         for(int i=0;i<=10;i++){
             editText[i] = (EditText)findViewById(textId[i]);
-            editText[i].setTextSize(Universal.abbr.getTextSizeDP());
+            editText[i].setTextSize(Universal.memory.getTextSizeDP());
             imageView[i] = (ImageView)findViewById(imageId[i]);
         }
         editText[11] = (EditText)findViewById(textId[11]);

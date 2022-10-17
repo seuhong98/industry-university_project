@@ -13,5 +13,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class publicKey {
     String Key;
-    LocalDateTime time;
+    int make_sequence;
+    int key_order;
 }

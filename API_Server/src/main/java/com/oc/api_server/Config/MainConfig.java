@@ -5,6 +5,7 @@ import com.oc.api_server.Repository.SessionRepository;
 import com.oc.api_server.Repository.UserRepository;
 import com.oc.api_server.Service.*;
 import com.oc.api_server.interceptor.LoginInterceptor;
+import com.oc.api_server.interceptor.SessionInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,6 +49,9 @@ public class MainConfig implements WebMvcConfigurer {
         return new ReviewService(reviewRepository);
     }
 
+    @Bean
+    ConfirmService signatureService(){return new ConfirmService(security());}
+
 
     //특수기능=========================================================================================================
     @Bean
@@ -58,7 +62,9 @@ public class MainConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        System.out.println("으딜 감히");
+        registry.addInterceptor(new SessionInterceptor())
+                .addPathPatterns("/Review/**")
+                .addPathPatterns("/Login/**");
         registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/Review/**");
     }

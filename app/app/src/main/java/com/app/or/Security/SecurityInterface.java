@@ -1,6 +1,4 @@
-package com.app.or.Interface;
-
-import java.math.BigInteger;
+package com.app.or.Security;
 
 public interface SecurityInterface {
     /**
@@ -22,22 +20,6 @@ public interface SecurityInterface {
      */
     void MakePrivateKey();
 
-    /**
-     * 비대칭 키를 이용해서 비밀키 전송
-     */
-    void SendPrivateKey();
-
-    /**
-     * 현재 사용하고 있는 public 키가 유효 한지 확인
-     * @return
-     */
-    boolean TouchPublicKey();
-
-    /**
-     * 서버에서 public 키들 받아오기
-     * @return
-     */
-    boolean GetPublicKey();
 
     /**
      * 각종 정보 저장하기 위한 키 생성
@@ -59,4 +41,10 @@ public interface SecurityInterface {
     String decryption(String cipherTXT);
 
     boolean isSetKeyStore();
+
+    String Signature(String txt);
+
+    String RSA(String txt);
+
+    String GetSessionKeyByRSA();
 }

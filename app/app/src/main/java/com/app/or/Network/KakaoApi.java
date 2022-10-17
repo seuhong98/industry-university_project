@@ -1,4 +1,4 @@
-package com.app.or.Library;
+package com.app.or.Network;
 
 import com.app.or.Config.Universal;
 
@@ -36,7 +36,7 @@ public class KakaoApi extends Thread{
             URL obj = new URL("https://dapi.kakao.com/v2/local/search/address.json");
             HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("Authorization","KakaoAK "+ Universal.abbr.GetKakaoKey());
+            conn.setRequestProperty("Authorization","KakaoAK "+ Universal.memory.GetKakaoKey());
 
             conn.setDoOutput(true);
 

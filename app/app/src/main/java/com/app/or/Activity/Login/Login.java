@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.app.or.Activity.Main.MainActivity;
 import com.app.or.Config.Universal;
 import com.app.or.R;
-import com.app.or.Universal.HttpsHelper;
 
 public class Login extends AppCompatActivity {
 
@@ -43,7 +42,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //todo 로그인 요청을 하는 동안 페이지 동작 1.로딩중이라는것 보여주기 2.결과 보여주기
-                String answer = Universal.httpsHelper.Login(Login_id.getText().toString(),Login_Password.getText().toString());
+                String answer = Universal.NETWORK.Login(Login_id.getText().toString(),Login_Password.getText().toString());
                 if(answer.equals("True")){
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);

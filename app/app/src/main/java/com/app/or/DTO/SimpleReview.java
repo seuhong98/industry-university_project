@@ -2,13 +2,13 @@ package com.app.or.DTO;
 
 import android.graphics.Bitmap;
 
-public class Review_preview {
+public class SimpleReview {
     long id;
     String Simple_title;
     String Simple_main;
     Bitmap Simple_image;
 
-    public Review_preview(long id, String simple_title, String simple_main, Bitmap simple_image) {
+    public SimpleReview(long id, String simple_title, String simple_main, Bitmap simple_image) {
         this.id = id;
         Simple_title = simple_title;
         Simple_main = simple_main;

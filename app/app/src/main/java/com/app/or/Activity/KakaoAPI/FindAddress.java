@@ -3,10 +3,8 @@ package com.app.or.Activity.KakaoAPI;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 
 import android.view.View;
@@ -18,15 +16,11 @@ import android.widget.Toast;
 import com.app.or.Config.Universal;
 import com.app.or.DTO.Address;
 import com.app.or.R;
-import com.app.or.Universal.HttpsHelper;
 
 
-import net.daum.mf.map.api.MapCircle;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
-
-import java.io.BufferedReader;
 
 
 /**
@@ -67,7 +61,7 @@ public class FindAddress extends AppCompatActivity {
                 if(AddressText.getText().toString().length() == 0){
                     Toast.makeText(context,"검색어를 입력해주세요",Toast.LENGTH_SHORT).show();
                 }else {
-                    address =  Universal.httpsHelper.KakaoKeywordSearch(AddressText.getText().toString());
+                    address =  Universal.NETWORK.KakaoKeywordSearch(AddressText.getText().toString());
                     if(address.isNull()){
                         Toast.makeText(context,"유효한 주소가 없습니다.",Toast.LENGTH_SHORT).show();
                     }else {

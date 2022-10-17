@@ -1,6 +1,7 @@
 package com.oc.api_server.Controller;
 
 import com.oc.api_server.Repository.SessionRepository;
+import com.oc.api_server.Service.Security;
 import com.oc.api_server.VO.publicKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,21 +11,32 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
 @RequestMapping("/Session")
 public class Session {
+    private String Separator = "|Sep|";
 
     @Autowired
     SessionRepository repository;
 
+    @Autowired
+    private Security security;
+
 
     @RequestMapping("/MakeSession")
     @ResponseBody
-    public String MakeSession(HttpServletRequest request){
+    public String MakeSession(HttpServletRequest request, String params){
+        params = ConvertNormalToSpecial(params);
         HttpSession session = request.getSession();
-        return session.getId();
+        params = params.substring(0,params.length()-5);
+        String[] data = params.split(" ");
+        int start = (int)(Math.random()*100000 +1);
+        session.setAttribute("SessionKey",security.RSADecryption(Integer.parseInt(data[0]),data[1]));
+        session.setAttribute("Count",start);
+        return security.encryptionBySessionKey((session.getId()+Separator+start),data[1]);
     }
 
     @RequestMapping("/GetPublicKey")
@@ -33,8 +45,15 @@ public class Session {
         try {
             StringBuffer sb = new StringBuffer();
             List<publicKey> list = repository.getPublicKey();
+            list.sort(new Comparator<publicKey>() {
+                @Override
+                public int compare(publicKey o1, publicKey o2) {
+                    return o1.getKey_order()- o2.getKey_order();
+                }
+            });
+            sb.append(list.get(0).getMake_sequence()+Separator);
             for(publicKey t : list){
-                sb.append(t.getKey()+"\n");
+                sb.append(t.getKey()+Separator);
             }
             return sb.toString();
 
@@ -44,14 +63,17 @@ public class Session {
     }
     @RequestMapping("/TouchPublicKey")
     @ResponseBody
-    public boolean TouchPublicKey(LocalDateTime time){
+    public boolean TouchPublicKey(int make_sequence){
         try {
-            LocalDateTime get = repository.getCurrent().getTime();
-            return time.isAfter(get);
-
+            int get = repository.getCurrent().getMake_sequence();
+            return (get == make_sequence);
         }catch (Exception e){
             return false;
         }
+    }
+
+    private String ConvertNormalToSpecial(String Normal){
+        return Normal.replace("a**b**a","&").replace("b**a**b","=").replace("c**b**c","%");
     }
 
 }

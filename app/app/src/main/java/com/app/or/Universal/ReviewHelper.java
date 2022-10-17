@@ -3,10 +3,9 @@ package com.app.or.Universal;
 import com.app.or.Config.Universal;
 import com.app.or.DTO.MakeReview1;
 import com.app.or.DTO.Review;
-import com.app.or.DTO.Review_preview;
+import com.app.or.DTO.SimpleReview;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ReviewHelper {
@@ -16,7 +15,7 @@ public class ReviewHelper {
         return  null;
     }
 
-    public static List<Review_preview> getPreviewReview(byte division, int paging){
+    public static List<SimpleReview> getPreviewReview(byte division, int paging){
         return  null;
     }
 
@@ -82,7 +81,7 @@ public class ReviewHelper {
 //            }else {
 //                return false;
 //            }
-            Universal.httpsHelper.HttpConnectWithParams("Review1/saveReview1",params);
+            Universal.NETWORK.HttpConnectWithParams("Review1/saveReview1",params);
             return true;
         }catch (Exception e){
             e.printStackTrace();

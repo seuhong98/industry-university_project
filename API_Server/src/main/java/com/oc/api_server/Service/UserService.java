@@ -33,7 +33,7 @@ public class UserService {
      * @param Email 검색을 위한 이메일
      * @return 유저
      */
-    public OrUser SingIn(String PW, String Email){
+    public OrUser SingIn(String Email, String PW){
         OrUser read= ur.findByEmail(security.TwoWayEncrypt(Email));
         if(read != null){
             if(security.match(PW,read.getPw())){

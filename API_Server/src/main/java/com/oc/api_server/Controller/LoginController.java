@@ -1,5 +1,7 @@
 package com.oc.api_server.Controller;
 
+import com.oc.api_server.Service.ConfirmService;
+import com.oc.api_server.Service.Security;
 import com.oc.api_server.Service.UserService;
 import com.oc.api_server.VO.OrUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +16,15 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/Login")
 public class LoginController {
+    public String Separator = "|Sep|";
 
     @Autowired
     private UserService uService;
+    @Autowired
+    private Security security;
+
+    @Autowired
+    private ConfirmService confirm;
 
 
 
@@ -48,21 +56,21 @@ public class LoginController {
 
     /**
      * 로그인 기능
-     * @param Pw 비밀번호
-     * @param Email 이메일
+     * @param params 참조값
      * @param request
      * @return
      */
     @PostMapping("/SignIn")
     @ResponseBody
-    public String SignIn(String Pw, String Email, HttpServletRequest request){
+    public String SignIn(String Signature,String params, HttpServletRequest request){
         HttpSession session = request.getSession();
+        String[] param = confirm.Data(session,params,Signature);
         try{
             if(session.getAttribute("try") == null || (int)session.getAttribute("try") < 5){
-                OrUser read = uService.SingIn(Pw,Email);
+                OrUser read = uService.SingIn(param[0],param[1]);
                 if(read != null){
                     session.setAttribute("User",read);
-                    return session.getId();
+                    return "TRUE";
                 }else{
                     if(session.getAttribute("try") != null){
                         session.setAttribute("try", (int)session.getAttribute("try")+1);

@@ -1,4 +1,4 @@
-package com.app.or.ETC;
+package com.app.or.Implementation;
 
 import java.math.BigInteger;
 import java.security.interfaces.RSAPublicKey;
@@ -34,5 +34,12 @@ public class SimpleKey implements RSAPublicKey {
 
     public void setModulus(BigInteger modulus) {
         Modulus = modulus;
+    }
+
+    public SimpleKey(BigInteger modulus) {
+        Modulus = modulus;
+    }
+
+    public SimpleKey() {
     }
 }

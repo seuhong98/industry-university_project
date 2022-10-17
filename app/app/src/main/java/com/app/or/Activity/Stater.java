@@ -2,44 +2,47 @@ package com.app.or.Activity;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 
 import com.app.or.Activity.Login.Login;
 import com.app.or.Activity.Main.MainActivity;
 import com.app.or.Config.Universal;
-import com.app.or.Universal.HttpsHelper;
-import com.app.or.Universal.ShareData;
-
-import java.security.MessageDigest;
+import com.app.or.FileSystem.FileSystem;
 
 public class Stater extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        checkPermission();
-        Universal.abbr.setFiledir(getFilesDir()+"/");
+        //Universal 초기화
+        Universal.UniversalInit();
+        Universal.NETWORK.MakeSession();
 
+        //퍼미션 받기
+        checkPermission();
+        //파일 저장을 위한 위치 경로 저장
+        Universal.memory.setFileDir(getFilesDir()+"/");
+
+        //글씨 크기 지정을 위한 행위
         Display display = getWindowManager().getDefaultDisplay();
         DisplayMetrics metrics = new DisplayMetrics();
         display.getMetrics(metrics);
         float density = getResources().getDisplayMetrics().density;
-        Universal.abbr.setTextSizeDP((int)((metrics.heightPixels/density)/30));
+        Universal.memory.setTextSizeDP((int)((metrics.heightPixels/density)/30));
 
+
+
+        //화면 지정 -로그인 유무
         Intent intent;
-        if( (new ShareData()).isSaveAccount() ){
-            Universal.httpsHelper.AutoLogin();
+        if( (new FileSystem()).isSaveAccount() ){
+            Universal.NETWORK.AutoLogin();
             intent = new Intent(getApplicationContext(), MainActivity.class);
         }else{
             intent = new Intent(getApplicationContext(), Login.class);
