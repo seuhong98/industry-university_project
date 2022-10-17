@@ -1,9 +1,8 @@
 package com.oc.api_server.Config;
 
-import com.oc.api_server.Repository.ReviewRepository;
-import com.oc.api_server.Repository.SessionRepository;
-import com.oc.api_server.Repository.UserRepository;
+import com.oc.api_server.Repository.*;
 import com.oc.api_server.Service.*;
+import com.oc.api_server.Useful.DataMapper;
 import com.oc.api_server.interceptor.LoginInterceptor;
 import com.oc.api_server.interceptor.SessionInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +28,12 @@ public class MainConfig implements WebMvcConfigurer {
     @Autowired
     private SessionRepository sessionRepository;
 
+    @Autowired
+    private GetSequence getSequence;
+
+    @Autowired
+    private SimpleReviewRepository simpleReviewRepository;
+
 
 
 
@@ -46,7 +51,7 @@ public class MainConfig implements WebMvcConfigurer {
 
     @Bean
     public ReviewService reviewService(){
-        return new ReviewService(reviewRepository);
+        return new ReviewService(reviewRepository,simpleReviewRepository,getSequence);
     }
 
     @Bean
@@ -58,6 +63,9 @@ public class MainConfig implements WebMvcConfigurer {
     Security security(){
         return new Security();
     }
+
+    @Bean
+    DataMapper dataMapper(){return new DataMapper();}
 
 
     @Override

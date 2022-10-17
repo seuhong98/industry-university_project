@@ -20,9 +20,7 @@ import android.widget.Toast;
 import com.app.or.Activity.KakaoAPI.FindAddress;
 import com.app.or.Config.Universal;
 import com.app.or.DTO.Address;
-import com.app.or.DTO.MakeReview1;
 import com.app.or.R;
-import com.app.or.Universal.ReviewHelper;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -31,7 +29,7 @@ import java.util.List;
 /**
  * 리뷰 쓰는 곳
  */
-public class Review1WriteActivity extends AppCompatActivity {
+public class ReviewWriteActivity extends AppCompatActivity {
 
 
     Address addressData;
@@ -39,12 +37,14 @@ public class Review1WriteActivity extends AppCompatActivity {
     int price = -1;
     EditText Guarantee0;
     EditText money0;
+    EditText management0;
 
     EditText Guarantee1;
     EditText management1;
 
     RadioButton is_monthlyR;
     RadioButton is_charterR;
+    RadioButton is_dormitoryR;
 
     LinearLayout is_monthly;
     LinearLayout is_charter;
@@ -75,7 +75,7 @@ public class Review1WriteActivity extends AppCompatActivity {
     //todo 글 지울 때 다 지우면 위 사진도 지워지도록 하기
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_review_review1write);
+        setContentView(R.layout.activity_review_review_write);
 
 
         loadImage = findViewById(R.id.review1LoadImage);
@@ -86,6 +86,7 @@ public class Review1WriteActivity extends AppCompatActivity {
         address = findViewById(R.id.review1findAddress);
         is_charterR = findViewById(R.id.is_charterR);
         is_monthlyR = findViewById(R.id.is_monthlyR);
+        is_dormitoryR = findViewById(R.id.is_dormitoryR);
 
         is_monthly = findViewById(R.id.is_monthly);
         is_charter = findViewById(R.id.is_charter);
@@ -93,6 +94,7 @@ public class Review1WriteActivity extends AppCompatActivity {
         Guarantee0 = findViewById(R.id.Guarantee0);
         Guarantee1 = findViewById(R.id.Guarantee1);
         money0 = findViewById(R.id.money0);
+        management0 = findViewById(R.id.management0);
         management1 = findViewById(R.id.management1);
         ratingBar = findViewById(R.id.review1Total);
 
@@ -179,32 +181,65 @@ public class Review1WriteActivity extends AppCompatActivity {
                         if(price == -1){
                             //todo 월세 전세금 설정 안했을 시
                         }else {
-                            MakeReview1 makeReview1 = new MakeReview1();
-                            makeReview1.setTitle(title.getText().toString());
-                            String t[] = new String[textVisibility+1];
+                            List<String> params = new ArrayList<>();
+                            params.add(title.getText().toString());
                             for(int i=0;i<=textVisibility;i++){
-                                t[i] = editText[i].getText().toString();
+                                if(editText[i].getText().toString().length() != 0){
+                                    if(editText[i].getText().toString().length()>10){
+                                        params.add(editText[i].getText().toString().substring(0,10));
+                                    }else{
+                                        params.add(editText[i].getText().toString());
+                                    }
+                                    break;
+                                }
                             }
-                            makeReview1.setMain(t);
-                            makeReview1.setImageAddress(imgArray.toArray(new Bitmap[imgArray.size()]));
-                            makeReview1.setAddress1(addressData.getAddress1());
-                            makeReview1.setAddress2(addressData.getAddress2());
-                            makeReview1.setX(addressData.getX());
-                            makeReview1.setY(addressData.getY());
-
-                            makeReview1.setPrice(price);
-                            makeReview1.setTotal(ratingBar.getRating());
-
-                            if(price == 0){
-                                makeReview1.setGuarantee(Integer.parseInt(Guarantee0.getText().toString()));
-                                makeReview1.setMoney(Integer.parseInt(money0.getText().toString()));
-                                makeReview1.setManagement(0);
-                            }else{
-                                makeReview1.setGuarantee(Integer.parseInt(Guarantee1.getText().toString()));
-                                makeReview1.setMoney(0);
-                                makeReview1.setManagement(Integer.parseInt(management1.getText().toString()));
+                            if(imageVisibility == -1){
+                                params.add("0");
+                                params.add("null");
+                            }else {
+                                params.add("1");
+                                params.add(Universal.imageHelper.Thumbnail(imgArray.get(0)));
                             }
-                            ReviewHelper.makeReview(makeReview1);
+                            StringBuffer temp = new StringBuffer();
+                            for(int i=0;i<=textVisibility;i++){
+                                temp.append(editText[i].getText().toString());
+                                if(imageVisibility>=i){
+                                    temp.append(Universal.imageHelper.ImageToString(imgArray.get(i)));
+                                }
+                            }
+                            params.add(temp.toString());
+                            if(is_dormitoryR.isActivated()){
+                                params.add("7");
+                            }else {
+                                Integer read =  Universal.memory.RegionToCode().get(addressData.getAddress1());
+                                if(read != null){
+                                    params.add(read+"");
+                                }else{
+                                    params.add("8");
+                                }
+                            }
+                            params.add(addressData.getX()+"");
+                            params.add(addressData.getY()+"");
+
+                            if(is_monthlyR.isActivated()){
+                                params.add("0");
+                                params.add(Integer.parseInt(Guarantee0.getText().toString())+"");
+                                params.add(Integer.parseInt(money0.getText().toString())+"");
+                                params.add(Integer.parseInt(management0.getText().toString())+"");
+                            }else if(is_charterR.isActivated()){
+                                params.add("1");
+                                params.add(Integer.parseInt(Guarantee1.getText().toString())+"");
+                                params.add("null");
+                                params.add(Integer.parseInt(management1.getText().toString())+"");
+                            }else {
+                                params.add("2");
+                                params.add("null");
+                                params.add("null");
+                                params.add("null");
+                            }
+                            params.add(ratingBar.getRating()+"");
+
+                            Universal.NETWORK.Request("Review/saveReview",params);
                             finish();
                         }
                     }catch (Exception e){

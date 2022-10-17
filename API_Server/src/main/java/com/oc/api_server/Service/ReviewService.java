@@ -1,8 +1,12 @@
 package com.oc.api_server.Service;
 
+import com.oc.api_server.Repository.GetSequence;
 import com.oc.api_server.Repository.ReviewRepository;
+import com.oc.api_server.Repository.SimpleReviewRepository;
+import com.oc.api_server.Useful.DataMapper;
 import com.oc.api_server.VO.Review;
 import com.oc.api_server.VO.SimpleReview;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,42 +14,96 @@ import java.util.Map;
 
 
 public class ReviewService {
+
+    private String ListSeparator = "|List|";
     private final ReviewRepository repository;
+    private final SimpleReviewRepository simpleReview;
+    private final GetSequence getSequence;
+    @Autowired
+    private DataMapper dataMapper;
 
-    public ReviewService(ReviewRepository repository) {
+    public ReviewService(ReviewRepository repository, SimpleReviewRepository simpleReview, GetSequence getSequence) {
         this.repository = repository;
+        this.simpleReview = simpleReview;
+        this.getSequence = getSequence;
     }
 
-    public String getList(){
-        List<SimpleReview> list = repository.getList();
+    public String getCurrentList(){
         StringBuffer sb = new StringBuffer();
-        for(SimpleReview t : list){
-            sb.append(t.getId()+" "+t.getTitle()+" "+t.getSimple_main()+" "+t.isIs_image()+"\n");
+        List<SimpleReview> list = simpleReview.getCurrent();
+        for(SimpleReview get : list){
+            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
         }
         return sb.toString();
     }
 
-    public String GetListContinue(long id){
-        List<SimpleReview> list = repository.getListContinue(id);
+    public String getList(Long id){
         StringBuffer sb = new StringBuffer();
-        for(SimpleReview t : list){
-            sb.append(t.getId()+" "+t.getTitle()+" "+t.getSimple_main()+" "+t.isIs_image()+"\n");
+        List<SimpleReview> list = simpleReview.getList(id);
+        for(SimpleReview get : list){
+            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
         }
         return sb.toString();
     }
 
-    public void SaveReview(Review review, long id){
+    public String getCurrentListByPlace(Integer place){
+        StringBuffer sb = new StringBuffer();
+        List<SimpleReview> list = simpleReview.getCurrentListByPlace(place);
+        for(SimpleReview get : list){
+            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
+        }
+        return sb.toString();
+    }
+    public String getListByPlace(Integer place,Long id){
+        StringBuffer sb = new StringBuffer();
+        List<SimpleReview> list = simpleReview.getListByPlace(place,id);
+        for(SimpleReview get : list){
+            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
+        }
+        return sb.toString();
+    }
+
+
+    public String getCurrentListByRating(){
+        StringBuffer sb = new StringBuffer();
+        List<SimpleReview> list = simpleReview.getCurrentListByRating();
+        for(SimpleReview get : list){
+            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
+        }
+        return sb.toString();
+    }
+    public String getListByRating(Long id){
+        StringBuffer sb = new StringBuffer();
+        List<SimpleReview> list = simpleReview.getListByRating(id);
+        for(SimpleReview get : list){
+            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
+        }
+        return sb.toString();
+    }
+
+    public String getMyList(Long id){
+        StringBuffer sb = new StringBuffer();
+        List<SimpleReview> list = simpleReview.getMyList(id);
+        for(SimpleReview get : list){
+            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
+        }
+        return sb.toString();
+    }
+
+    public void saveReview(String[] data, long id){
+        StringBuffer sb = new StringBuffer();
+        long review_id = getSequence.nextReview1_id();
+        Review review = dataMapper.ReviewDeserialization(data);
+        review.setId(review_id);
         review.setReview_owner(id);
-
+        SimpleReview simple = dataMapper.SimpleReviewDeserialization(data);
+        simple.setId(review_id);
+        simple.setReview_owner(id);
         repository.SaveReview(review);
+        simpleReview.saveReview(simple);
     }
 
-    public void SaveImage(String image,int count, long userid, long id){
-        Map<String,Object> params = new HashMap<>();
-        params.put("image_txt",image);
-        params.put("count_num",count);
-        params.put("userid",userid);
-        params.put("id",id);
-        repository.SaveImage(params);
-    }
+
+
+
 }

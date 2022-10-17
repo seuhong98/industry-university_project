@@ -3,45 +3,39 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.oc.api_server.Repository.ReviewRepository">
-    <select id="getList" resultType="SimpleReview">
-        SELECT r.id, r.title, r.preview as simple_main, is_image FROM review r Order by id DESC LIMIT 10
-    </select>
-
-    <select id="getListContinue" resultType="SimpleReview">
-        <![CDATA[
-        SELECT r.id, r.title, r.preview as simple_main, is_image FROM review r WHERE r.id <  #{last} Order by id DESC LIMIT 10
-        ]]>
-    </select>
-
     <insert id="SaveReview" parameterType="Review">
         insert into review
         values
             (
-                NEXT VALUE FOR review_id,
+                #{id},
+                #{title longtext},
+                #{preview},
 
-                     #{title},
-                     #{main},
+                #{is_image},
+                #{simple_image},
 
-                     #{preview},
-                     #{is_image},
+                #{main},
 
-                     #{address},
-                     #{x},
-                     #{y},
+                #{address},
+                #{x},
+                #{y},
 
-                     #{guarantee},
-                     #{price},
-                     #{money},
-                     #{management},
+                #{review_type},
+                #{guarantee},
+                #{money},
+                #{management},
 
-                     #{good},
+                #{good},
 
-                     #{review_owner},
-                     #{total},
+                #{review_owner},
 
-                     now(),
-                     now()
+                #{owner_rating},
 
+                #{create_day}
             )
     </insert>
+
+    <select id="getReview" resultType="Review">
+        select * from review WHERE s.id = #{id}
+    </select>
 </mapper>

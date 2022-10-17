@@ -71,10 +71,6 @@ public class UserService {
         ur.SetNickName(id, want);
     }
 
-    public void SetEmail(long id,String want){
-        ur.SetEmail(id, want);
-    }
-
     public void SetPw(long id, String want){
         ur.SetPw(id,security.makeOneWayEncrypt(want));
     }

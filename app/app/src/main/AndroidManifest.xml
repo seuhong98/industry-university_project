@@ -59,7 +59,13 @@
 
 
         <activity
-            android:name=".Activity.Review.Review1WriteActivity"
+            android:name=".Activity.Review.ReviewWriteActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+
+        <activity
+            android:name=".Activity.Review.ListActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
         </activity>

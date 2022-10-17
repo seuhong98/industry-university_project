@@ -5,8 +5,8 @@ import com.app.or.Memory.Memory;
 import com.app.or.Memory.MemoryInterface;
 import com.app.or.Security.SecurityInterface;
 import com.app.or.Network.Network;
+import com.app.or.Universal.DataMapper;
 import com.app.or.Universal.ImageHelper;
-import com.app.or.Universal.ReviewHelper;
 import com.app.or.Security.Security;
 
 public class Universal {
@@ -14,9 +14,9 @@ public class Universal {
     public static MemoryInterface memory;
     public static Network NETWORK;
     public static ImageHelper imageHelper;
-    public static ReviewHelper reviewHelper;
     public static SecurityInterface security;
     public static FileSystem fileSystem;
+    public static DataMapper dataMapper;
 
     static public void UniversalInit() {
         security = new Security();
@@ -24,7 +24,7 @@ public class Universal {
         NETWORK = new Network();
         imageHelper = new ImageHelper();
         memory = new Memory();
-        reviewHelper = new ReviewHelper();
+        dataMapper = new DataMapper();
 
         fileSystem = new FileSystem();
         if(fileSystem.isPublicKey()){

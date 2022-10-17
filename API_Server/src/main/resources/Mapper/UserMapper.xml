@@ -20,10 +20,6 @@
         UPDATE or_user set nickname = #{want} WHERE id= #{id};
     </update>
 
-    <update id="SetEmail">
-        UPDATE or_user set email = #{want} WHERE id= #{id};
-    </update>
-
     <update id="SetPw">
         UPDATE or_user set pw = #{want} WHERE id= #{id};
     </update>

@@ -3,6 +3,7 @@ package com.app.or.Memory;
 import com.app.or.Implementation.SimpleKey;
 
 import java.security.interfaces.RSAPublicKey;
+import java.util.Map;
 
 public interface MemoryInterface {
     public String GetKakaoKey();
@@ -30,4 +31,7 @@ public interface MemoryInterface {
     public int getPublicKeyVersion();
 
     public long getSessionTime();
+
+    public Map<String,Integer> RegionToCode();
+    public Map<Integer,String> CodeToRegion();
 }

@@ -74,7 +74,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="40"
                 android:orientation="horizontal"
-                android:weightSum="2">
+                android:weightSum="3">
 
                 <RadioButton
                     android:id="@+id/is_monthlyR"
@@ -94,6 +94,15 @@
 
                 </RadioButton>
 
+                <RadioButton
+                    android:id="@+id/is_dormitoryR"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="기숙사">
+
+                </RadioButton>
+
             </RadioGroup>
 
             <!-- 월세 -->
@@ -103,7 +112,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="60"
                 android:orientation="horizontal"
-                android:weightSum="2"
+                android:weightSum="3"
                 android:visibility="gone">
 
                 <EditText
@@ -123,6 +132,16 @@
                     android:layout_weight="1"
                     android:inputType="number"
                     android:hint="월세">
+
+                </EditText>
+
+                <EditText
+                    android:id="@+id/management0"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:hint="관리비">
 
                 </EditText>
 

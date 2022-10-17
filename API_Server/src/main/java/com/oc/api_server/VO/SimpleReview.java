@@ -1,43 +1,45 @@
 package com.oc.api_server.VO;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
+import java.time.LocalDateTime;
+
+@Setter
+@Getter
+@NoArgsConstructor
 public class SimpleReview {
-    long id;
-    String title;
-    String simple_main;
-    boolean is_image;
 
-    public long getId() {
-        return id;
-    }
+    Long id; //자동생성 ID (PK)
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    String title; //제목
+    String preview; //10글자 이내의 내용 글
 
-    public String getTitle() {
-        return title;
-    }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    Integer is_image; //이미지 여부
+    String simple_image; // 미리보기용 이미지
 
-    public String getSimple_main() {
-        return simple_main;
-    }
+    /*
+    효자1동 : 0 , 효자2동 : 1, 효자3동 : 2, 후평2동 : 3, 후평3동 : 4, 석사동 : 5, 거두리 : 6, 기숙사 : 7, 기타 : 8
+     */
+    Integer address;
+    Double x; //x축
+    Double y; //y축
 
-    public void setSimple_main(String simple_main) {
-        this.simple_main = simple_main;
-    }
+    /*
+    단위 만원
+    기숙사는 금액 미기입
+     */
+    Integer review_type; //0-> 월세_반전세    1 -> 전세    2-> 기숙사
+    Integer guarantee; //보증금 or 전세금
+    Integer money; //금액(월세)
+    Integer management; //관리비
 
-    public boolean isIs_image() {
-        return is_image;
-    }
+    Integer good; //좋아요 수
 
-    public void setIs_image(boolean is_image) {
-        this.is_image = is_image;
-    }
+    Long review_owner; //글쓴이 id;
+
+    Float owner_rating; //사용자 별점
 }

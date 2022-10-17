@@ -26,7 +26,7 @@ public class GetConnection extends Thread{
 
     public boolean answer;
 
-    public String[] data;
+    public String data;
 
     public GetConnection(String Request, List<String> params,boolean Encrypt){
         this.Request = Request;
@@ -74,7 +74,7 @@ public class GetConnection extends Thread{
 
             InputStream response = conn.getInputStream();
             InputStreamReader reader = new InputStreamReader(response,"UTF-8");
-            data = new BufferedReader(reader).readLine().split(Separator);
+            data = new BufferedReader(reader).readLine();
             answer = true;
         }catch (Exception e){
             e.printStackTrace();
@@ -94,26 +94,29 @@ public class GetConnection extends Thread{
 
             StringBuffer sb = new StringBuffer();
 
-            sb.append("params=");
-            StringBuffer StringParams = new StringBuffer();
 
-            for(String t : params){
-                StringParams.append(t+Separator);
-            }
-            sb.append(ConvertSpecialToNormal(Universal.security.encryptionBySessionKey(StringParams.toString())));
-            sb.append("&Signature=");
-            sb.append(ConvertSpecialToNormal(Universal.security.Signature(StringParams.toString())));
-            if(conn.getDoOutput()) {
-                conn.getOutputStream().write((sb.toString()).getBytes());
-                conn.getOutputStream().flush();
-                conn.getOutputStream().close();
+            if(params != null){
+                sb.append("params=");
+                StringBuffer StringParams = new StringBuffer();
+
+                for(String t : params){
+                    StringParams.append(t+Separator);
+                }
+                sb.append(ConvertSpecialToNormal(Universal.security.encryptionBySessionKey(StringParams.toString())));
+                sb.append("&Signature=");
+                sb.append(ConvertSpecialToNormal(Universal.security.Signature(StringParams.toString())));
+                if(conn.getDoOutput()) {
+                    conn.getOutputStream().write((sb.toString()).getBytes());
+                    conn.getOutputStream().flush();
+                    conn.getOutputStream().close();
+                }
             }
             conn.connect();
 
             InputStream response = conn.getInputStream();
             InputStreamReader reader = new InputStreamReader(response,"UTF-8");
             String input =  new BufferedReader(reader).readLine();
-            data = Universal.security.decryptionBySessionKey(input).split(Separator);
+            data = Universal.security.decryptionBySessionKey(input);
             answer = true;
         }catch (Exception e){
             e.printStackTrace();

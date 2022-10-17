@@ -130,27 +130,6 @@ public class LoginController {
         }
     }
 
-
-    /**
-     * 이메일 변경 메일 인증 컨트롤러 필요
-     * @param Want 원하는 것
-     * @param request
-     * @return
-     */
-    @PostMapping("/SetEmail")
-    @ResponseBody
-    public String SetEmail(String Want,HttpServletRequest request){
-        HttpSession session = request.getSession();
-        if( ((OrUser)session.getAttribute("User") != null)  && (session.getAttribute("MailCertificationPass") != null ? (boolean)session.getAttribute("MailCertificationPass"): false)){
-            uService.SetEmail(((OrUser)(session.getAttribute("User"))).getId(),Want);
-            return "Done";
-        }else{
-            return "NeedToLogin";
-        }
-
-    }
-
-
     /**
      * 비밀번호 변경
      * @param Want 원하는 것
@@ -166,23 +145,6 @@ public class LoginController {
             return "Done";
         }else{
             return "NeedToLogin";
-        }
-    }
-
-
-    /**
-     * 테스트 나중에 삭제
-     * @param request
-     * @return
-     */
-    @PostMapping("/Test")
-    @ResponseBody
-    public String TTTTT(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        if((OrUser)session.getAttribute("User") != null){
-            return "세션 유지";
-        }else{
-            return "세션 유지 못함";
         }
     }
 }

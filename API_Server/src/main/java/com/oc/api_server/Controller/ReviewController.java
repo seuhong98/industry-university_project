@@ -1,6 +1,7 @@
 package com.oc.api_server.Controller;
 
 
+import com.oc.api_server.Service.ConfirmService;
 import com.oc.api_server.Service.ReviewService;
 import com.oc.api_server.VO.OrUser;
 import com.oc.api_server.VO.Review;
@@ -19,47 +20,70 @@ public class ReviewController {
 
     @Autowired
     private ReviewService service;
+    @Autowired
+    private ConfirmService confirmService;
 
 
+    @PostMapping("/GetCurrentList")
+    @ResponseBody
+    public String getCurrentList(){
+        return service.getCurrentList();
+    }
 
     @PostMapping("/GetList")
     @ResponseBody
-    public String getList(HttpServletRequest request){
-
-        return service.getList();
+    public String getList(String Signature,String params, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String[] data = confirmService.Data(session,params,Signature);
+        return service.getList(Long.parseLong(data[0]));
     }
 
-    @PostMapping("/GetListContinue")
+    @PostMapping("/getCurrentListByPlace")
     @ResponseBody
-    public String getListContinue(long id){
-        return service.GetListContinue(id);
+    public String getCurrentListByPlace(String Signature,String params, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        //0: 지역
+        String[] data = confirmService.Data(session,params,Signature);
+        return service.getCurrentListByPlace(Integer.parseInt(data[0]));
+    }
+
+    @PostMapping("/getListByPlace")
+    @ResponseBody
+    public String getListByPlace(String Signature,String params, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        //0: 지역 1: id
+        String[] data = confirmService.Data(session,params,Signature);
+        return service.getListByPlace(Integer.parseInt(data[0]),Long.parseLong(data[1]));
+    }
+
+    @PostMapping("/getCurrentListByRating")
+    @ResponseBody
+    public String getCurrentListByRating(){
+        return service.getCurrentListByRating();
+    }
+
+    @PostMapping("/getListByRating")
+    @ResponseBody
+    public String getListByRating(String Signature,String params, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        //0: id
+        String[] data = confirmService.Data(session,params,Signature);
+        return service.getListByRating(Long.parseLong(data[0]));
+    }
+
+    @PostMapping("/getMyList")
+    @ResponseBody
+    public String getMyList(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        return service.getMyList(((OrUser)session.getAttribute("User")).getId());
     }
 
     @PostMapping("/saveReview")
     @ResponseBody
-    public String saveReview(Review review, HttpServletRequest request){
-        try {
-            HttpSession session = request.getSession();
-            long id = ((OrUser)session.getAttribute("User")).getId();
-            service.SaveReview(review,id);
-            return "Pass";
-        }catch (Exception e){
-            e.printStackTrace();
-            return "Fail";
-        }
+    public void saveReview(String Signature,String params, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String[] data = confirmService.Data(session,params,Signature);
+        service.saveReview(data,((OrUser)session.getAttribute("User")).getId());
     }
 
-    @PostMapping("/saveImage")
-    @ResponseBody
-    public String saveImage(String image,int count,long id,HttpServletRequest request){
-        try {
-            HttpSession session = request.getSession();
-            long userid = ((OrUser)session.getAttribute("User")).getId();
-            service.SaveImage(image,count,userid,id);
-            return "Pass";
-        }catch (Exception e){
-            e.printStackTrace();
-            return "Fail";
-        }
-    }
 }

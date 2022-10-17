@@ -10,13 +10,9 @@ import java.util.Map;
 
 @Mapper
 public interface ReviewRepository {
-    public List<SimpleReview> getList();
 
-    public List<SimpleReview> getListContinue(long last);
 
     public void SaveReview(Review review);
-
-
-    public void SaveImage(Map<String,Object> params);
+    public Review getReview(Long id);
 
 }

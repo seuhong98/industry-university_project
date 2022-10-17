@@ -26,8 +26,5 @@ public interface UserRepository {
 
     public void SetNickName(long id,String Want);
 
-    public void SetEmail(long id,String Want);
-
-
     public void SetPw(long id, String want);
 }

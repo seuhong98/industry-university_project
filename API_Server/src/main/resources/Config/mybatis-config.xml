@@ -6,7 +6,7 @@
     <typeAliases>
         <typeAlias type="com.oc.api_server.VO.OrUser" alias="OrUser"/>
         <typeAlias type="com.oc.api_server.VO.Review" alias="Review"/>
-        <typeAlias type="com.oc.api_server.VO.publicKey" alias="publicKey"/>
         <typeAlias type="com.oc.api_server.VO.SimpleReview" alias="SimpleReview"/>
+        <typeAlias type="com.oc.api_server.VO.publicKey" alias="publicKey"/>
     </typeAliases>
 </configuration>

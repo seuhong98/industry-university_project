@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class ImageHelper {
-    public static String ImageToString(Bitmap image){
+    public String ImageToString(Bitmap image){
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             image.compress(Bitmap.CompressFormat.JPEG,100,baos);
@@ -26,7 +26,25 @@ public class ImageHelper {
         }
     }
 
-    public static Bitmap StringToImage(String input){
+    public String Thumbnail(Bitmap image){
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            image.compress(Bitmap.CompressFormat.JPEG,50,baos);
+            byte[] array = baos.toByteArray();
+            StringBuffer sb = new StringBuffer();
+            sb.append(array.length+" ");
+            for(byte t : array){
+                sb.append(t+" ");
+            }
+            sb.setLength(sb.length()-1);
+            return sb.toString();
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Bitmap StringToImage(String input){
         StringTokenizer str = new StringTokenizer(input);
         int len = Integer.parseInt(str.nextToken());
         byte[] makeBitmap = new byte[len];
