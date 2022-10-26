@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/some_id.xml" value="0.194" />
         <entry key="app/src/main/res/layout/activity_kakaoapi_findaddress.xml" value="0.43353322347005213" />
-        <entry key="app/src/main/res/layout/activity_login_login.xml" value="0.34057971014492755" />
+        <entry key="app/src/main/res/layout/activity_login_login.xml" value="0.21747589111328125" />
         <entry key="app/src/main/res/layout/activity_login_singup.xml" value="0.19630192502532928" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20385125201681384" />
         <entry key="app/src/main/res/layout/activity_main3.xml" value="0.19630192502532928" />

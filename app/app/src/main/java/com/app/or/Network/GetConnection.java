@@ -50,7 +50,7 @@ public class GetConnection extends Thread{
             HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            conn.setRequestProperty("Cookie", "JSESSIONID="+Universal.memory.getId());
+            //conn.setRequestProperty("Cookie", "JSESSIONID="+Universal.memory.getId());
             conn.setDefaultUseCaches(false);
             conn.setDoOutput(true);
 
@@ -64,6 +64,7 @@ public class GetConnection extends Thread{
                     StringParams.append(t+Separator);
                 }
                 sb.append(ConvertSpecialToNormal(StringParams.toString()));
+                System.out.println(ConvertSpecialToNormal(StringParams.toString()));
                 if(conn.getDoOutput()) {
                     conn.getOutputStream().write((sb.toString()).getBytes());
                     conn.getOutputStream().flush();
@@ -75,6 +76,7 @@ public class GetConnection extends Thread{
             InputStream response = conn.getInputStream();
             InputStreamReader reader = new InputStreamReader(response,"UTF-8");
             data = new BufferedReader(reader).readLine();
+
             answer = true;
         }catch (Exception e){
             e.printStackTrace();
@@ -125,7 +127,7 @@ public class GetConnection extends Thread{
     }
 
     private String ConvertSpecialToNormal(String Special){
-        return Special.replace("&","a**b**a").replace("=","b**a**b").replace("%","c**b**c");
+        return Special.replace("&","a**b**a").replace("=","b**a**b").replace("%","c**b**c").replace("+","*space*");
     }
 
 }

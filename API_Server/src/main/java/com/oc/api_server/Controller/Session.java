@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import java.util.List;
 @RequestMapping("/Session")
 public class Session {
     private String Separator = "|Sep|";
+    private String UnSeparator = "\\|Sep\\|";
 
     @Autowired
     SessionRepository repository;
@@ -29,13 +31,17 @@ public class Session {
     @RequestMapping("/MakeSession")
     @ResponseBody
     public String MakeSession(HttpServletRequest request, String params){
-        params = ConvertNormalToSpecial(params);
+        params = ConvertNormalToSpecial(params).split(UnSeparator)[0];
         HttpSession session = request.getSession();
-        params = params.substring(0,params.length()-5);
         String[] data = params.split(" ");
         int start = (int)(Math.random()*100000 +1);
         session.setAttribute("SessionKey",security.RSADecryption(Integer.parseInt(data[0]),data[1]));
         session.setAttribute("Count",start);
+
+        System.out.println("start");
+        System.out.println(Arrays.toString(data));
+        System.out.println((String)session.getAttribute("SessionKey"));
+
         return security.encryptionBySessionKey((session.getId()+Separator+start),(String)session.getAttribute("SessionKey"));
     }
 
@@ -53,7 +59,7 @@ public class Session {
             });
             sb.append(list.get(0).getMake_sequence()+Separator);
             for(publicKey t : list){
-                sb.append(t.getKey()+Separator);
+                sb.append(t.getPublickey()+Separator);
             }
             return sb.toString();
 
@@ -73,7 +79,7 @@ public class Session {
     }
 
     private String ConvertNormalToSpecial(String Normal){
-        return Normal.replace("a**b**a","&").replace("b**a**b","=").replace("c**b**c","%");
+        return Normal.replace("a**b**a","&").replace("b**a**b","=").replace("c**b**c","%").replace("*space*","+");
     }
 
 }

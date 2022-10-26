@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -75,7 +76,7 @@ public class FileSystem {
             FileWriter fw = new FileWriter(file);
             BufferedWriter writer = new BufferedWriter(fw);
             for(String t : get){
-                writer.write(Universal.security.encryption(t+"\n"));
+                writer.write(t+"\n");
             }
             writer.close();
         }catch (Exception e){

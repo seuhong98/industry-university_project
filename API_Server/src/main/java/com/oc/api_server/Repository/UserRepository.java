@@ -15,16 +15,16 @@ public interface UserRepository {
      * @param email
      * @return
      */
-    public void CreateUser(String nickname, String pw, String email);
+    void CreateUser(String nickname, String pw, String email);
 
     // public boolean UpdateUser();
 
 
-    public void DeleteUser(String Email);
+    void DeleteUser(String Email);
 
-    public OrUser findByEmail(String Email);
+    OrUser findByEmail(String Email);
 
-    public void SetNickName(long id,String Want);
+    void SetNickName(long id,String Want);
 
-    public void SetPw(long id, String want);
+    void SetPw(long id, String want);
 }

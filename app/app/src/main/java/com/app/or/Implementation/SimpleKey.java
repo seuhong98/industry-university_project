@@ -14,7 +14,7 @@ public class SimpleKey implements RSAPublicKey {
 
     @Override
     public String getAlgorithm() {
-        return null;
+        return "RSA";
     }
 
     @Override
@@ -32,14 +32,7 @@ public class SimpleKey implements RSAPublicKey {
         return Modulus;
     }
 
-    public void setModulus(BigInteger modulus) {
-        Modulus = modulus;
-    }
-
     public SimpleKey(BigInteger modulus) {
         Modulus = modulus;
-    }
-
-    public SimpleKey() {
     }
 }

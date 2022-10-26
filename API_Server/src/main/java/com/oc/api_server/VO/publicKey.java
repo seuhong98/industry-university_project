@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 public class publicKey {
-    String Key;
+    String publickey;
     int make_sequence;
     int key_order;
 }

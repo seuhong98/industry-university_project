@@ -24,7 +24,7 @@ public interface MemoryInterface {
 
     public long getOrder();
 
-    public RSAPublicKey[] getPublicKey();
+    public RSAPublicKey getPublicKey(int i);
 
     public void setPublicKey(String[] publicKey);
 

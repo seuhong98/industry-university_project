@@ -47,4 +47,6 @@ public interface SecurityInterface {
     String RSA(String txt);
 
     String GetSessionKeyByRSA();
+
+    String temp();
 }

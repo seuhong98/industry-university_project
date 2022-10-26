@@ -9,24 +9,19 @@ import com.app.or.Universal.DataMapper;
 import com.app.or.Universal.ImageHelper;
 import com.app.or.Security.Security;
 
+import java.util.Arrays;
+
 public class Universal {
 
-    public static MemoryInterface memory;
-    public static Network NETWORK;
-    public static ImageHelper imageHelper;
-    public static SecurityInterface security;
-    public static FileSystem fileSystem;
-    public static DataMapper dataMapper;
+    public static MemoryInterface memory = new Memory();;
+    public static Network NETWORK = new Network();;
+    public static ImageHelper imageHelper = new ImageHelper();;
+    public static SecurityInterface security = new Security();
+    public static FileSystem fileSystem = new FileSystem();;
+    public static DataMapper dataMapper = new DataMapper();;
 
     static public void UniversalInit() {
-        security = new Security();
         security.MakePrivateKey();
-        NETWORK = new Network();
-        imageHelper = new ImageHelper();
-        memory = new Memory();
-        dataMapper = new DataMapper();
-
-        fileSystem = new FileSystem();
         if(fileSystem.isPublicKey()){
             memory.setPublicKey(fileSystem.GetPublicKey());
             if(memory.getPublicKeyVersion() != NETWORK.PublicKeyVersion()){
@@ -38,4 +33,5 @@ public class Universal {
             memory.setPublicKey(fileSystem.GetPublicKey());
         }
     }
+
 }

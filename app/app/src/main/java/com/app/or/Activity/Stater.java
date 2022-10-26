@@ -21,14 +21,12 @@ public class Stater extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Universal 초기화
-        Universal.UniversalInit();
-        Universal.NETWORK.MakeSession();
-
         //퍼미션 받기
         checkPermission();
+
         //파일 저장을 위한 위치 경로 저장
         Universal.memory.setFileDir(getFilesDir()+"/");
+
 
         //글씨 크기 지정을 위한 행위
         Display display = getWindowManager().getDefaultDisplay();
@@ -37,16 +35,21 @@ public class Stater extends AppCompatActivity {
         float density = getResources().getDisplayMetrics().density;
         Universal.memory.setTextSizeDP((int)((metrics.heightPixels/density)/30));
 
+        //Universal 초기화
+        Universal.UniversalInit();
+        System.out.println(Universal.security.temp());
+        Universal.NETWORK.MakeSession();
 
 
+        Intent intent = new Intent(getApplicationContext(), Login.class);
         //화면 지정 -로그인 유무
-        Intent intent;
-        if( (new FileSystem()).isSaveAccount() ){
-            Universal.NETWORK.AutoLogin();
-            intent = new Intent(getApplicationContext(), MainActivity.class);
-        }else{
-            intent = new Intent(getApplicationContext(), Login.class);
-        }
+//        Intent intent;
+//        if( (new FileSystem()).isSaveAccount() ){
+//            Universal.NETWORK.AutoLogin();
+//            intent = new Intent(getApplicationContext(), MainActivity.class);
+//        }else{
+//            intent = new Intent(getApplicationContext(), Login.class);
+//        }
         startActivity(intent);
     }
 
