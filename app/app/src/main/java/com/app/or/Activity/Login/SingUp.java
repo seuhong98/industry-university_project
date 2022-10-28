@@ -10,7 +10,7 @@ public class SingUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_singup);
+        setContentView(R.layout.activity_login_signin);
         //todo 회원가입 화면과 로직 필요
     }
 }

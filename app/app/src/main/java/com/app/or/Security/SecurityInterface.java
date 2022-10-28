@@ -16,9 +16,9 @@ public interface SecurityInterface {
     String decryptionBySessionKey(String cipher);
 
     /**
-     * 비밀키 변수에 저장
+     * 초기화 기능 수행
      */
-    void MakePrivateKey();
+    void init();
 
 
     /**

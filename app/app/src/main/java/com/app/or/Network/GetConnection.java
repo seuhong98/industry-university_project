@@ -50,7 +50,9 @@ public class GetConnection extends Thread{
             HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            //conn.setRequestProperty("Cookie", "JSESSIONID="+Universal.memory.getId());
+            if(Universal.memory.getId() != null){
+                conn.setRequestProperty("Cookie", "JSESSIONID="+Universal.memory.getId());
+            }
             conn.setDefaultUseCaches(false);
             conn.setDoOutput(true);
 

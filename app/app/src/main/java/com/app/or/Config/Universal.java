@@ -21,7 +21,8 @@ public class Universal {
     public static DataMapper dataMapper = new DataMapper();;
 
     static public void UniversalInit() {
-        security.MakePrivateKey();
+        security.init();
+
         if(fileSystem.isPublicKey()){
             memory.setPublicKey(fileSystem.GetPublicKey());
             if(memory.getPublicKeyVersion() != NETWORK.PublicKeyVersion()){

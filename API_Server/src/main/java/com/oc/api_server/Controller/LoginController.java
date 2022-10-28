@@ -70,20 +70,21 @@ public class LoginController {
                 OrUser read = uService.SingIn(param[0],param[1]);
                 if(read != null){
                     session.setAttribute("User",read);
-                    return "TRUE";
+                    return security.encryptionBySessionKey("TRUE",(String)session.getAttribute("SessionKey"));
                 }else{
                     if(session.getAttribute("try") != null){
                         session.setAttribute("try", (int)session.getAttribute("try")+1);
                     }else{
                         session.setAttribute("try",1);
                     }
-                    return "FALSE";
+                    return security.encryptionBySessionKey("FALSE",(String)session.getAttribute("SessionKey"));
                 }
             }else{
-                return "TooManyWrong";
+                return security.encryptionBySessionKey("TooManyWrong",(String)session.getAttribute("SessionKey"));
             }
         }catch (Exception e){
-            return "ERR";
+            e.printStackTrace();
+            return security.encryptionBySessionKey("ERR",(String)session.getAttribute("SessionKey"));
         }
     }
 

@@ -37,11 +37,6 @@ public class Session {
         int start = (int)(Math.random()*100000 +1);
         session.setAttribute("SessionKey",security.RSADecryption(Integer.parseInt(data[0]),data[1]));
         session.setAttribute("Count",start);
-
-        System.out.println("start");
-        System.out.println(Arrays.toString(data));
-        System.out.println((String)session.getAttribute("SessionKey"));
-
         return security.encryptionBySessionKey((session.getId()+Separator+start),(String)session.getAttribute("SessionKey"));
     }
 
@@ -77,6 +72,7 @@ public class Session {
             return false;
         }
     }
+
 
     private String ConvertNormalToSpecial(String Normal){
         return Normal.replace("a**b**a","&").replace("b**a**b","=").replace("c**b**c","%").replace("*space*","+");

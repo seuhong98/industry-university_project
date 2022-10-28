@@ -83,10 +83,10 @@ public class Network {
                 }else if (data.equals("TooManyWrong")){
                     return "TooManyWrong";
                 }else{
-                    return "err";
+                    return "ERR";
                 }
             }else {
-                return "err";
+                return "ERR";
             }
         }catch (Exception e){
             e.printStackTrace();
