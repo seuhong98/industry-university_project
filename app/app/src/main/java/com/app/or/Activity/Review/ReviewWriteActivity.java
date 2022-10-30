@@ -211,12 +211,12 @@ public class ReviewWriteActivity extends AppCompatActivity {
                             if(is_dormitoryR.isActivated()){
                                 params.add("7");
                             }else {
-                                Integer read =  Universal.memory.RegionToCode().get(addressData.getAddress1());
-                                if(read != null){
-                                    params.add(read+"");
-                                }else{
-                                    params.add("8");
-                                }
+                                //Integer read =  Universal.memory.RegionToCode().get(addressData.getAddress1());
+                                //if(read != null){
+                                //    params.add(read+"");
+                                //}else{
+                                //    params.add("8");
+                                //}
                             }
                             params.add(addressData.getX()+"");
                             params.add(addressData.getY()+"");

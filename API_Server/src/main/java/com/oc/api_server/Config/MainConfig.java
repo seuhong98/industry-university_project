@@ -45,8 +45,8 @@ public class MainConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public CertificationService certificationService(){
-        return new CertificationService(emailSender,security(),userRepository);
+    public EmailService certificationService(){
+        return new EmailService(emailSender);
     }
 
     @Bean
@@ -56,6 +56,11 @@ public class MainConfig implements WebMvcConfigurer {
 
     @Bean
     ConfirmService signatureService(){return new ConfirmService(security());}
+
+    @Bean
+    DataService dataService(){
+        return new DataService();
+    }
 
 
     //특수기능=========================================================================================================

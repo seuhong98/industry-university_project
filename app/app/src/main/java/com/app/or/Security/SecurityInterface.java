@@ -21,6 +21,7 @@ public interface SecurityInterface {
     void init();
 
 
+
     /**
      * 각종 정보 저장하기 위한 키 생성
      */

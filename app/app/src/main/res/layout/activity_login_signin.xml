@@ -61,301 +61,303 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="82"
+
+            android:weightSum="100"
+            android:orientation="horizontal"
             >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5">
+
+            </LinearLayout>
 
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="90"
                 android:orientation="vertical"
                 android:weightSum="100">
+                    <!-- 메인 시작 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2">
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="6">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="회원가입"
+                        android:autoSizeTextType="uniform"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3">
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="10"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="75">
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="이메일 입력"
+                            android:id="@+id/signup_email">
+
+                        </android.support.design.widget.TextInputEditText>
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="25"
+                        android:background="@drawable/send_email"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/check_email"
+                        />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:visibility="gone"
+                    android:id="@+id/use_uni_box">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/warn_red"
+                        android:id="@+id/use_uni" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="10"
+                    android:orientation="horizontal"
+                    android:weightSum="100"
+                    android:visibility="visible"
+                    >
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="75">
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="인증번호"
+                            android:id="@+id/check_email_code"
+                            android:inputType="numberDecimal">
+
+                        </android.support.design.widget.TextInputEditText>
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="27"
+                        android:background="@drawable/check_code_none"
+                        android:layout_margin="10dp"
+                        android:id="@+id/check_email_code_bt"
+                        android:enabled="false"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/warn_red"
+                        android:id="@+id/check_email_txt"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="10"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="75">
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="닉네임 입력"
+                            android:id="@+id/check_nickname">
+
+                        </android.support.design.widget.TextInputEditText>
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="25"
+                        android:background="@drawable/check_same"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/check_nickname_bt"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/warn_red"
+                        android:id="@+id/check_nickname_txt"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="9">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="비밀번호 입력"
+                            android:id="@+id/signup_pw"
+                            android:inputType="textPassword">
+
+                        </android.support.design.widget.TextInputEditText>
+
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="9">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="비밀번호 재입력"
+                            android:id="@+id/signup_pw_check"
+                            android:inputType="textPassword">
+
+                        </android.support.design.widget.TextInputEditText>
+
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2">
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="5">
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="아래 약관에 모두 동의 합니다.(선택 포함)"
+                        android:id="@+id/agreeAll">
+
+                    </CheckBox>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="82"
-                    android:orientation="horizontal"
-                    android:weightSum="20">
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
+                    android:layout_weight="1"></LinearLayout>
 
-                    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"
+                    android:background="#FFD3D3D3"></LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"></LinearLayout>
 
-                    <!-- 메인 시작 -->
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="18">
-                        <ScrollView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent" android:orientation="vertical"
-                                android:weightSum="100">
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="8">
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:text="회원가입"
-                                        android:autoSizeTextType="uniform"
-                                        android:textColor="@color/black"/>
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="5">
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="12"
-                                    android:orientation="horizontal"
-                                    android:weightSum="100">
-                                    <android.support.design.widget.TextInputLayout
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="75">
-                                        <android.support.design.widget.TextInputEditText
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:hint="이메일 입력"
-                                            android:id="@+id/input_email">
-
-                                        </android.support.design.widget.TextInputEditText>
-
-                                    </android.support.design.widget.TextInputLayout>
-
-                                    <Button
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="25"
-                                        android:background="@drawable/send_email"
-                                        android:layout_marginBottom="10dp"
-                                        />
-                                </LinearLayout>
-
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1">
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="12"
-                                    android:orientation="horizontal"
-                                    android:weightSum="100"
-                                    android:visibility="visible"
-                                    >
-                                    <android.support.design.widget.TextInputLayout
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="75">
-                                        <android.support.design.widget.TextInputEditText
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:hint="인증번호"
-                                            android:id="@+id/check_nickname">
-
-                                        </android.support.design.widget.TextInputEditText>
-
-                                    </android.support.design.widget.TextInputLayout>
-
-                                    <Button
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="27"
-                                        android:background="@drawable/check_code"
-                                        android:layout_margin="10dp"
-                                        />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="3">
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="12"
-                                    android:orientation="horizontal"
-                                    android:weightSum="100">
-                                    <android.support.design.widget.TextInputLayout
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="75">
-                                        <android.support.design.widget.TextInputEditText
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:hint="닉네임 입력"
-                                            android:id="@+id/check_nickname">
-
-                                        </android.support.design.widget.TextInputEditText>
-
-                                    </android.support.design.widget.TextInputLayout>
-
-                                    <Button
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="25"
-                                        android:background="@drawable/check_same"
-                                        android:layout_marginBottom="10dp"
-                                        />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="5">
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="10">
-                                    <android.support.design.widget.TextInputLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
-                                        <android.support.design.widget.TextInputEditText
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:hint="비밀번호 입력"
-                                            android:id="@+id/input_id">
-
-                                        </android.support.design.widget.TextInputEditText>
-
-                                    </android.support.design.widget.TextInputLayout>
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="2">
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="10">
-                                    <android.support.design.widget.TextInputLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
-                                        <android.support.design.widget.TextInputEditText
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:hint="비밀번호 재입력"
-                                            android:id="@+id/pw">
-
-                                        </android.support.design.widget.TextInputEditText>
-
-                                    </android.support.design.widget.TextInputLayout>
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="2">
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="5">
-                                    <CheckBox
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:text="아래 약관에 모두 동의 합니다.(선택 포함)">
-
-                                    </CheckBox>
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="2"></LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="0.1"
-                                    android:background="#FFD3D3D3"></LinearLayout>
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="2"></LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="20"
-                                    android:weightSum="4"
-                                    android:orientation="vertical">
-                                    <CheckBox
-                                        android:layout_width="match_parent"
-                                        android:layout_height="0dp"
-                                        android:layout_weight="1"
-                                        android:text="이용 약관 (필수)"
-                                        android:button="@drawable/mycheckbox"/>
-                                    <CheckBox
-                                        android:layout_width="match_parent"
-                                        android:layout_height="0dp"
-                                        android:layout_weight="1"
-                                        android:text="개인정보 취급 방침 (필수)"
-                                        android:button="@drawable/mycheckbox"/>
-                                    <CheckBox
-                                        android:layout_width="match_parent"
-                                        android:layout_height="0dp"
-                                        android:layout_weight="1"
-                                        android:text="마케팅 정보 수신 동의 (선택)"
-                                        android:button="@drawable/mycheckbox"/>
-                                    <CheckBox
-                                        android:layout_width="match_parent"
-                                        android:layout_height="0dp"
-                                        android:layout_weight="1"
-                                        android:text="만 14세 이상이며 최원가입을 신청합니다."
-                                        android:button="@drawable/mycheckbox"/>
-
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-
-                        </ScrollView>
-
-
-
-
-
-                    </LinearLayout>
-
-                    <!-- 메인 끝 -->
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-                    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="20"
+                    android:weightSum="4"
+                    android:orientation="vertical">
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="이용 약관 (필수)"
+                        android:button="@drawable/mycheckbox"
+                        android:id="@+id/prime_agree"/>
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="개인정보 취급 방침 (필수)"
+                        android:button="@drawable/mycheckbox"
+                        android:id="@+id/security_agree"/>
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="마케팅 정보 수신 동의 (선택)"
+                        android:button="@drawable/mycheckbox"
+                        android:id="@+id/marketing_agree"/>
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="만 14세 이상이며 최원가입을 신청합니다."
+                        android:button="@drawable/mycheckbox"
+                        android:id="@+id/age_agree"/>
 
                 </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5">
 
             </LinearLayout>
 
@@ -369,7 +371,9 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/signup_bt_none"/>
+                android:background="@drawable/signup_bt_none"
+                android:id="@+id/signup_bt"
+                android:enabled="false"/>
         </LinearLayout>
 
     </LinearLayout>

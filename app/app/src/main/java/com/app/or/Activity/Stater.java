@@ -37,7 +37,6 @@ public class Stater extends AppCompatActivity {
 
         //Universal 초기화
         Universal.UniversalInit();
-        System.out.println(Universal.security.temp());
         Universal.NETWORK.MakeSession();
 
 

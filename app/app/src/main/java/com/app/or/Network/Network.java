@@ -47,12 +47,12 @@ public class Network {
     public void MakeSession(){
         try {
             List<String> params = new ArrayList<>();
+            Universal.security.init();
             params.add(Universal.security.GetSessionKeyByRSA());
             beforeTime = System.currentTimeMillis();
             GetConnection getConnection = new GetConnection("Session/MakeSession",params,false);
             getConnection.start();
             getConnection.join();
-            String ttt = Universal.security.decryptionBySessionKey(getConnection.data);
             String read[] = (Universal.security.decryptionBySessionKey(getConnection.data)).split(UnSeparator);
             Universal.memory.setOrder(Integer.parseInt(read[1]));
             Universal.memory.setId(read[0]);
@@ -110,7 +110,11 @@ public class Network {
             GetConnection getConnection = new GetConnection(Request,Params,true);
             getConnection.start();
             getConnection.join();
-            return getConnection.data.split(UnSeparator);
+            if(getConnection.answer){
+                return getConnection.data.split(UnSeparator);
+            }else{
+                return null;
+            }
         }catch (Exception e){
             return null;
         }
@@ -127,11 +131,15 @@ public class Network {
             getConnection.start();
             getConnection.join();
             String[] read = getConnection.data.split(UnListSeparator);
-            List<String[]> answer = new ArrayList<>();
-            for(String t :read){
-                answer.add(t.split(UnSeparator));
+            if(getConnection.answer){
+                List<String[]> answer = new ArrayList<>();
+                for(String t :read){
+                    answer.add(t.split(UnSeparator));
+                }
+                return answer;
+            }else {
+                return null;
             }
-            return answer;
         }catch (Exception e){
             e.printStackTrace();
             return null;

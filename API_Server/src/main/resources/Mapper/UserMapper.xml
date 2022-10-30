@@ -4,8 +4,8 @@
 
 <mapper namespace="com.oc.api_server.Repository.UserRepository">
     <insert id="CreateUser">
-        INSERT INTO or_user  (id,nickname,email,pw)
-            VALUES (NEXT VALUE FOR user_id,#{nickname},#{email},#{pw});
+        INSERT INTO or_user  (id,email,nickname,pw,use_agree,security_agree,marketing_agree,age_agree)
+            VALUES (NEXT VALUE FOR user_id,#{email},#{nickname},#{pw},#{use_agree},#{security_agree},#{marketing_agree},#{age_agree});
     </insert>
 
     <delete id="DeleteUser">
@@ -23,4 +23,8 @@
     <update id="SetPw">
         UPDATE or_user set pw = #{want} WHERE id= #{id};
     </update>
+
+    <select id="findByNickname" resultType="OrUser">
+        SELECT * FROM or_user WHERE nickname = #{Nickname};
+    </select>
 </mapper>

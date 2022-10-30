@@ -15,7 +15,7 @@ public interface UserRepository {
      * @param email
      * @return
      */
-    void CreateUser(String nickname, String pw, String email);
+    void CreateUser(String email, String nickname, String pw, byte use_agree, byte security_agree, byte marketing_agree, byte age_agree);
 
     // public boolean UpdateUser();
 
@@ -27,4 +27,6 @@ public interface UserRepository {
     void SetNickName(long id,String Want);
 
     void SetPw(long id, String want);
+
+    OrUser findByNickname(String Nickname);
 }

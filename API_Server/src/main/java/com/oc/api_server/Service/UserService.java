@@ -15,15 +15,12 @@ public class UserService {
     }
 
     /**
-     * 로그인 요청
-     * @param nickName 닉네임
-     * @param PW 비밀번호
-     * @param Email 이메일
+     * 회원가입 요청
      * @return
      */
-    public boolean SignUp(String nickName, String PW, String Email){
-        ur.CreateUser(nickName,security.makeOneWayEncrypt(PW),security.TwoWayEncrypt(Email));
-        return false;
+    public boolean SignUp(String email, String nickname, String pw, byte use_agree, byte security_agree, byte marketing_agree, byte age_agree){
+        ur.CreateUser(security.TwoWayEncrypt(email),nickname,security.makeOneWayEncrypt(pw),use_agree,security_agree,marketing_agree,age_agree);
+        return CheckIsUniqueEmail(email);
     }
 
 
@@ -76,6 +73,23 @@ public class UserService {
     }
 
 
+    public boolean CheckIsUniqueEmail(String email){
+        OrUser user =  ur.findByEmail(security.TwoWayEncrypt(email));
+        if(user != null){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    public boolean CheckIsUniqueNickname(String nickname){
+        OrUser user =  ur.findByNickname(nickname);
+        if(user != null){
+            return false;
+        }else {
+            return true;
+        }
+    }
 
 
 

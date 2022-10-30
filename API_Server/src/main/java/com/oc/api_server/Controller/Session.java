@@ -37,6 +37,8 @@ public class Session {
         int start = (int)(Math.random()*100000 +1);
         session.setAttribute("SessionKey",security.RSADecryption(Integer.parseInt(data[0]),data[1]));
         session.setAttribute("Count",start);
+        System.out.println("SessionKey "+(String)session.getAttribute("SessionKey"));
+
         return security.encryptionBySessionKey((session.getId()+Separator+start),(String)session.getAttribute("SessionKey"));
     }
 

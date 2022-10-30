@@ -14,7 +14,6 @@ class UserServiceTest {
 
     @Test
     void signUp() {
-        service.SignUp("닉네임입니다1","1234","tlstmdgh369@kangwon.ac.kr");
         System.out.println("실행");
     }
 }

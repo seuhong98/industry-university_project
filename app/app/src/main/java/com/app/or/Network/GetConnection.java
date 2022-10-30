@@ -66,7 +66,6 @@ public class GetConnection extends Thread{
                     StringParams.append(t+Separator);
                 }
                 sb.append(ConvertSpecialToNormal(StringParams.toString()));
-                System.out.println(ConvertSpecialToNormal(StringParams.toString()));
                 if(conn.getDoOutput()) {
                     conn.getOutputStream().write((sb.toString()).getBytes());
                     conn.getOutputStream().flush();
@@ -78,7 +77,6 @@ public class GetConnection extends Thread{
             InputStream response = conn.getInputStream();
             InputStreamReader reader = new InputStreamReader(response,"UTF-8");
             data = new BufferedReader(reader).readLine();
-
             answer = true;
         }catch (Exception e){
             e.printStackTrace();

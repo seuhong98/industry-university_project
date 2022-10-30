@@ -2,6 +2,7 @@ package com.app.or.Activity.Login;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -55,6 +56,9 @@ public class Login extends AppCompatActivity {
                     Login_bt.setBackground(getDrawable(R.drawable.login_button_disable));
                     Login_bt.setEnabled(false);
                     login_change_pw.setVisibility(View.VISIBLE);
+                }else if(answer.equals("TRUE")){
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
                 }
             }
         });
@@ -63,7 +67,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SingUp.class);
-                startActivity(intent);
+                startActivityForResult(intent,100);
             }
         });
 
@@ -73,5 +77,14 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"터치 성공",Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode==100){
+            if(resultCode==200){
+                Universal.NETWORK.AutoLogin();
+            }
+        }
     }
 }

@@ -29,32 +29,6 @@ public class LoginController {
 
 
     /**
-     * 회원가입
-     * @param ID 닉네임용 아이디
-     * @param Pw 비밀번호
-     * @param Email 이메일
-     * @param request
-     * @return
-     */
-    @PostMapping("/Signup")
-    @ResponseBody
-    public String SignUp(String ID, String Pw, String Email, HttpServletRequest request){
-        HttpSession session = request.getSession();
-        try{
-            if((boolean)session.getAttribute("MailCertificationPass")){
-                uService.SignUp(ID,Pw,Email);
-                session.removeAttribute("MailCertificationPass");
-                return "TRUE";
-            }else{
-                return "Need_mailCertification";
-            }
-        }catch (Exception e){
-            return "ERR";
-        }
-    }
-
-
-    /**
      * 로그인 기능
      * @param params 참조값
      * @param request
@@ -65,6 +39,9 @@ public class LoginController {
     public String SignIn(String Signature,String params, HttpServletRequest request){
         HttpSession session = request.getSession();
         String[] param = confirm.Data(session,params,Signature);
+        if(param == null){
+            return "Deodorization";
+        }
         try{
             if(session.getAttribute("try") == null || (int)session.getAttribute("try") < 5){
                 OrUser read = uService.SingIn(param[0],param[1]);

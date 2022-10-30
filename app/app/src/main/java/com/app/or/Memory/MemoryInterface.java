@@ -32,6 +32,8 @@ public interface MemoryInterface {
 
     public long getSessionTime();
 
-    public Map<String,Integer> RegionToCode();
-    public Map<Integer,String> CodeToRegion();
+    public Integer RegionToCode(String input);
+    public String CodeToRegion(int input);
+
+    public Integer getUniCode(String input);
 }
