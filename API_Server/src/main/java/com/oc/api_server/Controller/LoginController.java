@@ -16,8 +16,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/Login")
 public class LoginController {
-    public String Separator = "|Sep|";
-
+    
     @Autowired
     private UserService uService;
     @Autowired
@@ -40,7 +39,7 @@ public class LoginController {
         HttpSession session = request.getSession();
         String[] param = confirm.Data(session,params,Signature);
         if(param == null){
-            return "Deodorization";
+            return security.encryptionBySessionKey("Deodorization",(String)session.getAttribute("SessionKey"));
         }
         try{
             if(session.getAttribute("try") == null || (int)session.getAttribute("try") < 5){

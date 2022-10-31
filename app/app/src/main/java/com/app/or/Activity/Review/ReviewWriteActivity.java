@@ -7,7 +7,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.app.or.Activity.KakaoAPI.FindAddress;
@@ -31,122 +34,89 @@ import java.util.List;
  */
 public class ReviewWriteActivity extends AppCompatActivity {
 
+    TextInputEditText review_title;
+    TextInputEditText review_all_money;
+    TextInputEditText review_month_money;
+
+    RadioButton month;
+    RadioButton year;
+    RadioButton school;
+
+    Button backward_review;
+    Button findMap;
+    Button findPhoto;
+
+    EditText Text;
+    ImageView ImageArray[];
+
+    LinearLayout review_money_box;
+
+    ScrollView scroll;
 
     Address addressData;
 
-    int price = -1;
-    EditText Guarantee0;
-    EditText money0;
-    EditText management0;
+    Bitmap[] SaveImage = new Bitmap[5];
 
-    EditText Guarantee1;
-    EditText management1;
+    int image_focus = -1;
 
-    RadioButton is_monthlyR;
-    RadioButton is_charterR;
-    RadioButton is_dormitoryR;
-
-    LinearLayout is_monthly;
-    LinearLayout is_charter;
-
-    EditText title;
-    EditText editText[];
-    ImageView imageView[];
-    Button loadImage;
-    Button save;
-    Button address;
-    String inputAddress="";
-
-    List<Bitmap> imgArray = new ArrayList<>(11);
-
-    int[] textId = {
-            R.id.review1Text0 , R.id.review1Text1 , R.id.review1Text2 , R.id.review1Text3 , R.id.review1Text4 , R.id.review1Text5 , R.id.review1Text6 , R.id.review1Text7 , R.id.review1Text8 , R.id.review1Text9 , R.id.review1Text10 , R.id.review1Text11
-    };
     int[] imageId = {
-            R.id.review1Image0 ,	R.id.review1Image1 ,	R.id.review1Image2 ,	R.id.review1Image3 ,	R.id.review1Image4 ,	R.id.review1Image5 ,	R.id.review1Image6 ,	R.id.review1Image7 ,	R.id.review1Image8 ,	R.id.review1Image9 ,	R.id.review1Image10
+            R.id.review_image_1 ,	R.id.review_image_2 ,	R.id.review_image_3 ,	R.id.review_image_4 ,	R.id.review_image_5
     };
 
-    int textVisibility =0;
-    int imageVisibility =-1;
-
-    RatingBar ratingBar;
+    int count=0;
 
 
-    //todo 글 지울 때 다 지우면 위 사진도 지워지도록 하기
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_review_write);
 
+        review_title = (TextInputEditText) findViewById(R.id.review_title);
+        review_all_money = (TextInputEditText) findViewById(R.id.review_all_money);
+        review_month_money = (TextInputEditText) findViewById(R.id.review_month_money);
 
-        loadImage = findViewById(R.id.review1LoadImage);
-        editText = new EditText[12];
-        imageView = new ImageView[11];
-        title = findViewById(R.id.review1Title);
-        save = findViewById(R.id.review1Save);
-        address = findViewById(R.id.review1findAddress);
-        is_charterR = findViewById(R.id.is_charterR);
-        is_monthlyR = findViewById(R.id.is_monthlyR);
-        is_dormitoryR = findViewById(R.id.is_dormitoryR);
+        month = (RadioButton)findViewById(R.id.month);
+        year = (RadioButton)findViewById(R.id.year);
+        school = (RadioButton)findViewById(R.id.school);
 
-        is_monthly = findViewById(R.id.is_monthly);
-        is_charter = findViewById(R.id.is_charter);
+        backward_review = (Button)findViewById(R.id.backward_review);
+        findMap = (Button)findViewById(R.id.findMap);
+        findPhoto = (Button)findViewById(R.id.findPhoto);
 
-        Guarantee0 = findViewById(R.id.Guarantee0);
-        Guarantee1 = findViewById(R.id.Guarantee1);
-        money0 = findViewById(R.id.money0);
-        management0 = findViewById(R.id.management0);
-        management1 = findViewById(R.id.management1);
-        ratingBar = findViewById(R.id.review1Total);
-
-
-        for(int i=0;i<=10;i++){
-            editText[i] = (EditText)findViewById(textId[i]);
-            editText[i].setTextSize(Universal.memory.getTextSizeDP());
-            imageView[i] = (ImageView)findViewById(imageId[i]);
+        Text = (EditText) findViewById(R.id.review_txt);
+        for(int i=0;i<5;i++){
+            ImageArray[i] = (ImageView) findViewById(imageId[i]);
         }
-        editText[11] = (EditText)findViewById(textId[11]);
 
+        review_money_box = (LinearLayout)findViewById(R.id.review_money_box);
 
-        is_monthlyR.setOnClickListener(new View.OnClickListener() {
+        scroll = (ScrollView) findViewById(R.id.scroll);
+        //====맵핑 완료 ====//
+
+        month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                is_charter.setVisibility(View.GONE);
-                is_monthly.setVisibility(View.VISIBLE);
-                price = 0;
+                review_money_box.setVisibility(View.VISIBLE);
+                review_all_money.setHint("보증금(만원)");
             }
         });
 
-        is_charterR.setOnClickListener(new View.OnClickListener() {
+        year.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                is_charter.setVisibility(View.VISIBLE);
-                is_monthly.setVisibility(View.GONE);
-                price  = 1;
+                review_money_box.setVisibility(View.VISIBLE);
+                review_all_money.setHint("전세금(만원)");
+            }
+        });
+
+        school.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                review_money_box.setVisibility(View.INVISIBLE);
             }
         });
 
 
-
-
-        loadImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(textVisibility == 0 && editText[0].getText().length() == 0){
-                    editText[0].setVisibility(View.GONE);
-                }
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, 100);
-
-            }
-        });
-        //todo 자연스럽게 지워지고 하는 부분 추가 해야함
-
-
-        /**
-         * 위치 저장하기
-         */
-        address.setOnClickListener(new View.OnClickListener() {
+        findMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent goAddress = new Intent(getApplicationContext(), FindAddress.class);
@@ -154,106 +124,26 @@ public class ReviewWriteActivity extends AppCompatActivity {
             }
         });
 
-        /**
-         * 저장하는 부분
-         */
-        save.setOnClickListener(new View.OnClickListener() {
+        findPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!(title.getText().length()>0)){
-                    //todo 제목을 입력하세요 팝업
-                    return;
-                }
-                if(addressData == null  || addressData.isNull()){
-                    //todo 주소를 입력하세요 팝업
-                    return;
-                }
-                boolean is_ok= false;
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent, 100);
+            }
+        });
 
-                for(int i=0;i<12;i++){
-                    if(editText[i].getText().length() > 4){
-                        is_ok = true;
-                        break;
-                    }
-                }
-                if(is_ok){
-                    try {
-                        if(price == -1){
-                            //todo 월세 전세금 설정 안했을 시
-                        }else {
-                            List<String> params = new ArrayList<>();
-                            params.add(title.getText().toString());
-                            for(int i=0;i<=textVisibility;i++){
-                                if(editText[i].getText().toString().length() != 0){
-                                    if(editText[i].getText().toString().length()>10){
-                                        params.add(editText[i].getText().toString().substring(0,10));
-                                    }else{
-                                        params.add(editText[i].getText().toString());
-                                    }
-                                    break;
-                                }
-                            }
-                            if(imageVisibility == -1){
-                                params.add("0");
-                                params.add("null");
-                            }else {
-                                params.add("1");
-                                params.add(Universal.imageHelper.Thumbnail(imgArray.get(0)));
-                            }
-                            StringBuffer temp = new StringBuffer();
-                            for(int i=0;i<=textVisibility;i++){
-                                temp.append(editText[i].getText().toString());
-                                if(imageVisibility>=i){
-                                    temp.append(Universal.imageHelper.ImageToString(imgArray.get(i)));
-                                }
-                            }
-                            params.add(temp.toString());
-                            if(is_dormitoryR.isActivated()){
-                                params.add("7");
-                            }else {
-                                //Integer read =  Universal.memory.RegionToCode().get(addressData.getAddress1());
-                                //if(read != null){
-                                //    params.add(read+"");
-                                //}else{
-                                //    params.add("8");
-                                //}
-                            }
-                            params.add(addressData.getX()+"");
-                            params.add(addressData.getY()+"");
-
-                            if(is_monthlyR.isActivated()){
-                                params.add("0");
-                                params.add(Integer.parseInt(Guarantee0.getText().toString())+"");
-                                params.add(Integer.parseInt(money0.getText().toString())+"");
-                                params.add(Integer.parseInt(management0.getText().toString())+"");
-                            }else if(is_charterR.isActivated()){
-                                params.add("1");
-                                params.add(Integer.parseInt(Guarantee1.getText().toString())+"");
-                                params.add("null");
-                                params.add(Integer.parseInt(management1.getText().toString())+"");
-                            }else {
-                                params.add("2");
-                                params.add("null");
-                                params.add("null");
-                                params.add("null");
-                            }
-                            params.add(ratingBar.getRating()+"");
-
-                            Universal.NETWORK.Request("Review/saveReview",params);
-                            finish();
-                        }
-                    }catch (Exception e){
-                        //todo 화면 변환 오류면 알려주고 화면 변환
-                        e.printStackTrace();
-                    }
-                }else{
-                    //todo 내용을 5자 이상 입력하세요 알람
-                    return;
-                }
+        scroll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Text.requestFocus();
             }
         });
 
     }
+
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -265,19 +155,13 @@ public class ReviewWriteActivity extends AppCompatActivity {
                     Bitmap img = BitmapFactory.decodeStream(in);
                     in.close();
 
-                    imageVisibility++;
-                    textVisibility++;
-                    imageView[imageVisibility].setVisibility(View.VISIBLE);
-                    imageView[imageVisibility].setImageBitmap(img);
-                    imgArray.add(img);
-                    editText[textVisibility].setVisibility(View.VISIBLE);
-                    editText[textVisibility].requestFocus();
+                    image_focus++;
+                    ImageArray[image_focus].setImageBitmap(img);
+                    SaveImage[image_focus] = img;
                 }catch (Exception e){
+                    Toast.makeText(this,"이미지 불러오기에 실패 했습니다.",Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
-                    //todo 오류 작업 해줘야함
                 };
-            }else{
-                //todo 갤러리 결과 오류 출력 해야함
             }
         }
 
@@ -285,9 +169,8 @@ public class ReviewWriteActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK){
                 addressData = (Address)data.getParcelableExtra("address");
                 System.out.println("x : "+addressData.getX()+"  y : "+addressData.getY());
-                Toast.makeText(this,"위치 저장 성공",Toast.LENGTH_SHORT);
             }else{
-                Toast.makeText(this,"위치 저장 실패",Toast.LENGTH_SHORT);
+                Toast.makeText(this,"위치 저장에 실패 했습니다.",Toast.LENGTH_SHORT).show();
             }
         }
     }
