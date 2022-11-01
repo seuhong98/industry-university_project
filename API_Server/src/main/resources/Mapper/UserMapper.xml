@@ -5,7 +5,7 @@
 <mapper namespace="com.oc.api_server.Repository.UserRepository">
     <insert id="CreateUser">
         INSERT INTO or_user  (id,email,nickname,pw,use_agree,security_agree,marketing_agree,age_agree)
-            VALUES (NEXT VALUE FOR user_id,#{email},#{nickname},#{pw},#{use_agree},#{security_agree},#{marketing_agree},#{age_agree});
+            VALUES (NEXTVAL('user_id'),#{email},#{nickname},#{pw},#{use_agree},#{security_agree},#{marketing_agree},#{age_agree});
     </insert>
 
     <delete id="DeleteUser">

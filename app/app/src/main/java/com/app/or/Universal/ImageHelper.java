@@ -10,26 +10,9 @@ import java.util.StringTokenizer;
 public class ImageHelper {
     public String ImageToString(Bitmap image){
         try {
+            image = Bitmap.createScaledBitmap(image,(int)(image.getWidth()/2),(int)(image.getHeight()/2),true);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             image.compress(Bitmap.CompressFormat.JPEG,100,baos);
-            byte[] array = baos.toByteArray();
-            StringBuffer sb = new StringBuffer();
-            sb.append(array.length+" ");
-            for(byte t : array){
-                sb.append(t+" ");
-            }
-            sb.setLength(sb.length()-1);
-            return sb.toString();
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public String Thumbnail(Bitmap image){
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            image.compress(Bitmap.CompressFormat.JPEG,50,baos);
             byte[] array = baos.toByteArray();
             StringBuffer sb = new StringBuffer();
             sb.append(array.length+" ");

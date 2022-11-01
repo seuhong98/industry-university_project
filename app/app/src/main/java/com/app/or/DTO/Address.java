@@ -10,7 +10,7 @@ public class Address implements Parcelable {
     String address2;
     Double x;
     Double y;
-
+    String SearchTxt;
 
 
 
@@ -19,9 +19,11 @@ public class Address implements Parcelable {
         address2 = parcel.readString();
         x = parcel.readDouble();
         y = parcel.readDouble();
+        SearchTxt = parcel.readString();
     }
 
-    public Address(String a){
+    public Address(String a,String searchTxt){
+        SearchTxt = searchTxt;
         String[] list = a.split(",");
         int len = 0;
         boolean doing[] = new boolean[4];
@@ -106,5 +108,6 @@ public class Address implements Parcelable {
         parcel.writeString(address2);
         parcel.writeDouble(x);
         parcel.writeDouble(y);
+        parcel.writeString(SearchTxt);
     }
 }

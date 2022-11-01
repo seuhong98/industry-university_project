@@ -82,7 +82,7 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode==100){
-            if(resultCode==200){
+            if(resultCode==RESULT_OK){
                 Universal.NETWORK.AutoLogin();
             }
         }

@@ -5,6 +5,6 @@
 <mapper namespace="com.oc.api_server.Repository.GetSequence">
 
     <select id="nextReview1_id" resultType="Long">
-        SELECT nextval(review1_id)
+        SELECT nextval('review1_id');
     </select>
 </mapper>

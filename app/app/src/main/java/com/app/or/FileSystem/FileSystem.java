@@ -24,7 +24,9 @@ public class FileSystem {
     public String[] GetAccount(){
         try {
             BufferedReader reader = new BufferedReader(new FileReader(Universal.memory.getFileDir()+"AccountData.txt"));
-            return (Universal.security.decryption(reader.readLine())).split(" ");
+            String[] answer = (Universal.security.decryption(reader.readLine())).split(" ");
+            Universal.memory.setUniName(answer[0].split("@")[1]);
+            return answer;
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -39,6 +41,7 @@ public class FileSystem {
             file.createNewFile();
             FileWriter fw = new FileWriter(file);
             BufferedWriter writer = new BufferedWriter(fw);
+            Universal.memory.setUniName(Email.split("@")[1]);
             writer.write(Universal.security.encryption(Email+" "+Password));
             writer.close();
         }catch (Exception e){

@@ -16,9 +16,6 @@ public interface MemoryInterface {
 
     public void setId(String setId);
 
-    public int getTextSizeDP();
-
-    public void setTextSizeDP(int textSizeDP);
 
     public void setOrder(long start);
 
@@ -36,4 +33,19 @@ public interface MemoryInterface {
     public String CodeToRegion(int input);
 
     public Integer getUniCode(String input);
+
+    public int getX();
+    public void setX(int x);
+    public int getY();
+    public void setY(int y);
+
+    public int getTextSize();
+    public void setTextSize(int textSize);
+    public int getTextBox();
+    public void setTextBox(int textBox);
+
+
+    public String getUniName();
+
+    public void setUniName(String uniName);
 }

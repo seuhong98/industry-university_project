@@ -3,6 +3,7 @@ package com.app.or.Activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -28,12 +29,16 @@ public class Stater extends AppCompatActivity {
         Universal.memory.setFileDir(getFilesDir()+"/");
 
 
-        //글씨 크기 지정을 위한 행위
+
         Display display = getWindowManager().getDefaultDisplay();
-        DisplayMetrics metrics = new DisplayMetrics();
-        display.getMetrics(metrics);
+        DisplayMetrics outMetrics = new DisplayMetrics ();
+        display.getMetrics(outMetrics);
+
         float density = getResources().getDisplayMetrics().density;
-        Universal.memory.setTextSizeDP((int)((metrics.heightPixels/density)/30));
+        Universal.memory.setX((int)Math.floor(outMetrics.widthPixels / density));
+        Universal.memory.setY((int)Math.floor(outMetrics.heightPixels / density));
+        Universal.memory.setTextBox((int)Math.floor((outMetrics.heightPixels / density)/30));
+        Universal.memory.setTextSize((int)Math.floor((outMetrics.heightPixels / density)/42));
 
         //Universal 초기화
         Universal.UniversalInit();

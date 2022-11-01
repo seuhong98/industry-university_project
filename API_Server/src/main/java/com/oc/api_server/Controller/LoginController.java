@@ -108,20 +108,22 @@ public class LoginController {
     }
 
     /**
-     * 비밀번호 변경
-     * @param Want 원하는 것
-     * @param request
+     * 비밀번호 변
      * @return
      */
     @PostMapping("/SetPw")
     @ResponseBody
-    public String SetPw(String Want,HttpServletRequest request){
+    public String SetPw(String Signature,String params, HttpServletRequest request){
         HttpSession session = request.getSession();
+        String[] param = confirm.Data(session,params,Signature);
+        if(param == null){
+            return security.encryptionBySessionKey("Deodorization",(String)session.getAttribute("SessionKey"));
+        }
         if((OrUser)session.getAttribute("User") != null){
-            uService.SetPw(((OrUser)(session.getAttribute("User"))).getId(),Want);
-            return "Done";
+            uService.SetPw(((OrUser)(session.getAttribute("User"))).getId(),param[0]);
+            return security.encryptionBySessionKey("Done",(String)session.getAttribute("SessionKey"));
         }else{
-            return "NeedToLogin";
+            return security.encryptionBySessionKey("NeedToLogin",(String)session.getAttribute("SessionKey"));
         }
     }
 }

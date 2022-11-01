@@ -1,17 +1,17 @@
 package com.app.or.DTO;
 
-public class Review {
+import android.graphics.Bitmap;
 
+import java.util.List;
+
+public class Review {
     Long id; //자동생성 ID (PK)
 
     String title; //제목
     String preview; //10글자 이내의 내용 글
 
-
-    Integer is_image; //이미지 여부
-    String simple_image; // 미리보기용 이미지
-
     String main; //메인 글 내용
+    List<Bitmap> image_txt;
 
     /*
     효자1동 : 0 , 효자2동 : 1, 효자3동 : 2, 후평2동 : 3, 후평3동 : 4, 석사동 : 5, 거두리 : 6, 기숙사 : 7, 기타 : 8
@@ -26,16 +26,31 @@ public class Review {
      */
     Integer review_type; //0-> 월세_반전세    1 -> 전세    2-> 기숙사
     Integer guarantee; //보증금 or 전세금
-    Integer money; //금액(월세)
-    Integer management; //관리비
+    Integer money; //금액(월세) or 관리비
 
     Integer good; //좋아요 수
 
 
     Long review_owner; //글쓴이 id;
 
-    Float owner_rating; //사용자 별점
+    Float owner_rating; //사용자 총 별점
+    Float size_room;
+    Float noise; //소음
+    Float service; //집주인 서비스
+    Float hygiene; //위생(ex.곰팡이,벌레 등등)
+    Float safety; //보안
+    Float temperature;//냉난방
+
     String create_day; //생성 날짜
+
+
+    public List<Bitmap> getImage_txt() {
+        return image_txt;
+    }
+
+    public void setImage_txt(List<Bitmap> image_txt) {
+        this.image_txt = image_txt;
+    }
 
     public Long getId() {
         return id;
@@ -59,22 +74,6 @@ public class Review {
 
     public void setPreview(String preview) {
         this.preview = preview;
-    }
-
-    public Integer getIs_image() {
-        return is_image;
-    }
-
-    public void setIs_image(Integer is_image) {
-        this.is_image = is_image;
-    }
-
-    public String getSimple_image() {
-        return simple_image;
-    }
-
-    public void setSimple_image(String simple_image) {
-        this.simple_image = simple_image;
     }
 
     public String getMain() {
@@ -133,14 +132,6 @@ public class Review {
         this.money = money;
     }
 
-    public Integer getManagement() {
-        return management;
-    }
-
-    public void setManagement(Integer management) {
-        this.management = management;
-    }
-
     public Integer getGood() {
         return good;
     }
@@ -163,6 +154,54 @@ public class Review {
 
     public void setOwner_rating(Float owner_rating) {
         this.owner_rating = owner_rating;
+    }
+
+    public Float getSize() {
+        return size_room;
+    }
+
+    public void setSize(Float size) {
+        this.size_room = size;
+    }
+
+    public Float getNoise() {
+        return noise;
+    }
+
+    public void setNoise(Float noise) {
+        this.noise = noise;
+    }
+
+    public Float getService() {
+        return service;
+    }
+
+    public void setService(Float service) {
+        this.service = service;
+    }
+
+    public Float getHygiene() {
+        return hygiene;
+    }
+
+    public void setHygiene(Float hygiene) {
+        this.hygiene = hygiene;
+    }
+
+    public Float getSafety() {
+        return safety;
+    }
+
+    public void setSafety(Float safety) {
+        this.safety = safety;
+    }
+
+    public Float getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(Float temperature) {
+        this.temperature = temperature;
     }
 
     public String getCreate_day() {

@@ -4,10 +4,10 @@
 
 <mapper namespace="com.oc.api_server.Repository.SessionRepository">
     <select id="getPublicKey" resultType="publicKey">
-        SELECT * from publicKey
+        SELECT * from publicKey;
     </select>
 
     <select id="getCurrent" resultType="publicKey">
-        SELECT * from publicKey LIMIT 1
+        SELECT * from publicKey LIMIT 1;
     </select>
 </mapper>

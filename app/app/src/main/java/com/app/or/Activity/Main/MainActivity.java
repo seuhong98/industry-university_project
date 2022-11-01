@@ -11,10 +11,12 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.app.or.Activity.Review.ReviewWriteActivity;
 import com.app.or.R;
+import com.app.or.Universal.ListViewAdapter;
 
 import java.security.MessageDigest;
 
@@ -22,49 +24,24 @@ import java.security.MessageDigest;
 public class MainActivity extends AppCompatActivity {
 
 
-    Button TTEST;
-    Button TTEST2;
-    TextView testkey;
+    TextView uni_name;
+
+    Button main_menu;
+    Button main_filter;
+    Button main_map;
+    Button main_write_bt;
+
+    ListView myList ;
+    ListViewAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_main);
-        //todo 로그인 후 처음 보여지는 화면 작성 해야함
-        TTEST = findViewById(R.id.TTEST);
-        TTEST.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ReviewWriteActivity.class);
-                startActivity(intent);
-            }
-        });
 
+        adapter = new ListViewAdapter();
+        myList = findViewById(R.id.myList);
+        myList.setAdapter(adapter);
 
-        TTEST2 = findViewById(R.id.TTEST2);
-        testkey = findViewById(R.id.testkey);
-
-        TTEST2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getAppKeyHash_Debug();
-            }
-        });
-
-    }
-
-    //debug
-    private void getAppKeyHash_Debug() {
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md;
-                md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                String something = new String(Base64.encode(md.digest(), 0));
-                testkey.setText(something);
-            }
-        } catch (Exception e) {
-            Log.e("name not found", e.toString());
-        }
     }
 }

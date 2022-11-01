@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Main.MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="100">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+
+        </LinearLayout>
+
+
+        <!-- 상단 뒤로가기 부분 시작-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:weightSum="100"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5">
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="80"
+                android:text="원하는것만 평가해주세요"
+                android:autoSizeTextType="uniform"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="81"
+            android:weightSum="100"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="80"
+                android:weightSum="100"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="5"
+                    android:text="방크기"
+                    android:autoSizeTextType="uniform">
+
+                </TextView>
+
+                <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="9"
+                    android:numStars="5"
+                    android:id="@+id/size">
+
+                </RatingBar>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="5"
+                    android:text="소음"
+                    android:autoSizeTextType="uniform">
+
+                </TextView>
+
+                <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="9"
+                    android:numStars="5"
+                    android:id="@+id/noise">
+
+                </RatingBar>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="5"
+                    android:text="집주인 서비스(수리 등)"
+                    android:autoSizeTextType="uniform">
+
+                </TextView>
+
+                <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="9"
+                    android:numStars="5"
+                    android:id="@+id/service">
+
+                </RatingBar>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="5"
+                    android:text="위생(ex.곰팡이,벌레 등)"
+                    android:autoSizeTextType="uniform">
+
+                </TextView>
+
+                <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="9"
+                    android:numStars="5"
+                    android:id="@+id/hygiene">
+
+                </RatingBar>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="5"
+                    android:text="보안"
+                    android:autoSizeTextType="uniform">
+
+                </TextView>
+
+                <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="9"
+                    android:numStars="5"
+                    android:id="@+id/safety">
+
+                </RatingBar>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="5"
+                    android:text="냉난방"
+                    android:autoSizeTextType="uniform">
+
+                </TextView>
+
+                <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="9"
+                    android:numStars="5"
+                    android:id="@+id/temperature">
+
+                </RatingBar>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10"/>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:background="@drawable/review_send"
+            android:id="@+id/send_review_fin">
+            <!-- 공백 -->
+        </Button>
+
+
+    </LinearLayout>
+</android.support.v7.widget.LinearLayoutCompat>

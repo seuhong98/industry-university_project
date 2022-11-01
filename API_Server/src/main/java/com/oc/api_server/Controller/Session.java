@@ -45,6 +45,7 @@ public class Session {
     @RequestMapping("/GetPublicKey")
     @ResponseBody
     public String GetPublicKey(){
+        System.out.println("get_key");
         try {
             StringBuffer sb = new StringBuffer();
             List<publicKey> list = repository.getPublicKey();

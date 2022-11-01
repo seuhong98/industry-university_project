@@ -17,6 +17,14 @@
         <entry key="app/src/main/res/drawable/list_map.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/login_button.xml" value="0.2135" />
         <entry key="app/src/main/res/drawable/login_singin.xml" value="0.2135" />
+        <entry key="app/src/main/res/drawable/main_filter.xml" value="0.2485" />
+        <entry key="app/src/main/res/drawable/main_map.xml" value="0.2485" />
+        <entry key="app/src/main/res/drawable/main_menu.xml" value="0.2565" />
+        <entry key="app/src/main/res/drawable/main_write_bt.xml" value="0.2485" />
+        <entry key="app/src/main/res/drawable/map_icon1.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/map_icon2.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/map_search.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/map_search_icon.xml" value="0.14" />
         <entry key="app/src/main/res/drawable/mycheckbox.xml" value="0.1445" />
         <entry key="app/src/main/res/drawable/review_photo.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/review_search_map.xml" value="0.16" />
@@ -26,18 +34,19 @@
         <entry key="app/src/main/res/drawable/signup_bt.xml" value="0.1445" />
         <entry key="app/src/main/res/drawable/signup_bt_none.xml" value="0.1535" />
         <entry key="app/src/main/res/drawable/some_id.xml" value="0.194" />
-        <entry key="app/src/main/res/layout/activity_kakaoapi_findaddress.xml" value="0.2689712524414063" />
+        <entry key="app/src/main/res/layout/activity_kakaoapi_findaddress.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login_login.xml" value="0.2853866577148438" />
-        <entry key="app/src/main/res/layout/activity_login_logintemp.xml" value="0.3531546471932981" />
-        <entry key="app/src/main/res/layout/activity_login_signin.xml" value="0.2699615478515625" />
+        <entry key="app/src/main/res/layout/activity_login_logintemp.xml" value="0.1535430908203125" />
+        <entry key="app/src/main/res/layout/activity_login_signin.xml" value="0.1405853271484375" />
         <entry key="app/src/main/res/layout/activity_login_singup.xml" value="0.19630192502532928" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20385125201681384" />
         <entry key="app/src/main/res/layout/activity_main3.xml" value="0.19630192502532928" />
         <entry key="app/src/main/res/layout/activity_main_Review1Write.xml" value="0.14427083333333332" />
-        <entry key="app/src/main/res/layout/activity_main_main.xml" value="0.3366896021571445" />
+        <entry key="app/src/main/res/layout/activity_main_main.xml" value="0.2704237330165194" />
         <entry key="app/src/main/res/layout/activity_review_list.xml" value="0.3066123188405797" />
+        <entry key="app/src/main/res/layout/activity_review_rating.xml" value="0.19399414062499998" />
         <entry key="app/src/main/res/layout/activity_review_review1write.xml" value="0.3686365763346354" />
-        <entry key="app/src/main/res/layout/activity_review_review_write.xml" value="0.2829696655273438" />
+        <entry key="app/src/main/res/layout/activity_review_review_write.xml" value="0.1499730748519117" />
         <entry key="app/src/main/res/layout/activity_review_writereview.xml" value="0.19630192502532928" />
         <entry key="app/src/main/res/layout/review_list.xml" value="0.27875671386718737" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.189" />

@@ -81,11 +81,14 @@ public class FindAddress extends AppCompatActivity {
         AddressSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent retIntent = new Intent();
-                retIntent.putExtra("address",address);
-                if(address.isNull()){
+                if(address == null){
+                    address =  Universal.NETWORK.KakaoKeywordSearch(AddressText.getText().toString());
+                }
+                if(address == null){
                     setResult(RESULT_CANCELED);
                 }else{
+                    Intent retIntent = new Intent();
+                    retIntent.putExtra("address",address);
                     setResult(RESULT_OK,retIntent);
                 }
                 finish();

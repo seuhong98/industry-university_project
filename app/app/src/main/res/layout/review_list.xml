@@ -60,7 +60,7 @@
                         android:layout_height="match_parent"
                         android:autoSizeTextType="uniform"
                         android:id="@+id/list_where"
-                        android:text="거두리" />
+                        android:text="위치" />
                 </LinearLayout>
 
 
@@ -80,7 +80,7 @@
                     android:layout_height="match_parent"
                     android:autoSizeTextType="uniform"
                     android:id="@+id/list_title"
-                    android:text="나는 야 퉁퉁이"
+                    android:text="제목"
                     android:textColor="@color/black"/>
             </LinearLayout>
 
@@ -121,7 +121,21 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="68"/>
+                    android:layout_weight="5"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="20"
+                    android:id="@+id/list_score"
+                    android:autoSizeTextType="uniform"
+                    android:text="별점 : 0.0/5"
+                    android:gravity="bottom"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="43"/>
 
                 <LinearLayout
                     android:layout_width="0dp"

@@ -4,34 +4,34 @@
 
 <mapper namespace="com.oc.api_server.Repository.SimpleReviewRepository">
     <select id="getCurrent" resultType="SimpleReview">
-        select * from simple_review order by id LIMIT 20
+        select * from simple_review order by id LIMIT 20;
     </select>
     <select id="getList" resultType="SimpleReview">
         <![CDATA[
-        select * from simple_review s WHERE s.id < #{id} order by id LIMIT 20
+        select * from simple_review s WHERE s.id < #{id} order by id LIMIT 20;
         ]]>
     </select>
 
     <select id="getCurrentListByPlace" resultType="SimpleReview">
-        select * from simple_review WHERE s.address = #{place} order by id  LIMIT 20
+        select * from simple_review WHERE s.address = #{place} order by id  LIMIT 20;
     </select>
     <select id="getListByPlace" resultType="SimpleReview">
         <![CDATA[
-        select * from simple_review s WHERE s.address = #{place} and s.id < #{id} order by id LIMIT 20
+        select * from simple_review s WHERE s.address = #{place} and s.id < #{id} order by id LIMIT 20;
         ]]>
     </select>
 
     <select id="getCurrentListByRating" resultType="SimpleReview">
-        select * from simple_review order by owner_rating LIMIT 20
+        select * from simple_review order by owner_rating LIMIT 20;
     </select>
     <select id="getListByRating" resultType="SimpleReview">
         <![CDATA[
-        select * from simple_review WHERE s.id < #{id} order by owner_rating LIMIT 20
+        select * from simple_review WHERE s.id < #{id} order by owner_rating LIMIT 20;
         ]]>
     </select>
 
     <select id="getMyList" resultType="SimpleReview">
-        select * from simple_review WHERE s.review_owner = #{id}
+        select * from simple_review WHERE s.review_owner = #{id};
     </select>
 
     <insert id="saveReview" parameterType="SimpleReview">
@@ -59,6 +59,6 @@
                 #{review_owner},
 
                 #{owner_rating}
-            )
+            );
     </insert>
 </mapper>

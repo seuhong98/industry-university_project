@@ -153,7 +153,7 @@
                     android:layout_weight="10"
                     android:weightSum="100"
                     android:orientation="horizontal"
-                    android:id="@+id/review_money_box">
+                    android:id="@+id/review_month_box">
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -179,8 +179,50 @@
                         <android.support.design.widget.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:hint="관리비(만원)"
+                            android:hint="월세+관리비(만원)"
                             android:id="@+id/review_month_money"
+                            android:inputType="numberDecimal">
+                        </android.support.design.widget.TextInputEditText>
+                    </android.support.design.widget.TextInputLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="10"
+                    android:weightSum="100"
+                    android:orientation="horizontal"
+                    android:id="@+id/review_year_box"
+                    android:visibility="gone">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="48">
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="전세금(만원)"
+                            android:id="@+id/review_all_money2"
+                            android:inputType="numberDecimal">
+                        </android.support.design.widget.TextInputEditText>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"/>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="48">
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="관리비(만원)"
+                            android:id="@+id/review_month_money2"
                             android:inputType="numberDecimal">
                         </android.support.design.widget.TextInputEditText>
                     </android.support.design.widget.TextInputLayout>
@@ -236,11 +278,12 @@
                     android:layout_height="0dp"
                     android:layout_weight="2"/>
 
+
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="42"
-                    android:id="@+id/scroll">
+                    android:scrollbars="none">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -248,11 +291,14 @@
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="25dp"
+                            android:layout_height="2000dp"
                             android:hint="내용을 입력하세요"
                             android:background="@null"
                             android:textSize="18dp"
-                            android:id="@+id/review_txt">
+                            android:id="@+id/review_txt"
+                            android:inputType="textMultiLine"
+                            android:scrollHorizontally="false"
+                            android:gravity="top">
                         </EditText>
 
                     </LinearLayout>
@@ -260,46 +306,64 @@
 
                 </ScrollView>
 
-                <ScrollView
-                    android:layout_width="wrap_content"
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="20">
+                    android:layout_weight="0.1"
+                    android:background="@color/main_color"/>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="19.9">
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:id="@+id/review_image_1"
-                            android:paddingRight="10dp"/>
+                            android:paddingRight="10dp"
+                            android:visibility="gone"
+                            android:adjustViewBounds="true"/>
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:id="@+id/review_image_2"
-                            android:paddingRight="10dp"/>
+                            android:paddingRight="10dp"
+                            android:visibility="gone"
+                            android:adjustViewBounds="true"/>
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:id="@+id/review_image_3"
-                            android:paddingRight="10dp"/>
+                            android:paddingRight="10dp"
+                            android:visibility="gone"
+                            android:adjustViewBounds="true"/>
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:id="@+id/review_image_4"
-                            android:paddingRight="10dp"/>
+                            android:paddingRight="10dp"
+                            android:visibility="gone"
+                            android:adjustViewBounds="true"/>
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:id="@+id/review_image_5"
-                            android:paddingRight="10dp"/>
+                            android:paddingRight="10dp"
+                            android:visibility="gone"
+                            android:adjustViewBounds="true"/>
 
 
 
                     </LinearLayout>
 
 
-                </ScrollView>
+                </HorizontalScrollView>
 
 
 
@@ -316,7 +380,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="9"
-            android:background="@drawable/review_send_none">
+            android:background="@drawable/review_send"
+            android:id="@+id/send_review">
             <!-- 공백 -->
         </Button>
 

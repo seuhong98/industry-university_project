@@ -152,9 +152,9 @@ public class Network {
         Address address = null;
         try {
             KakaoApi kakaoApi = new KakaoApi(query);
-            kakaoApi.run();
+            kakaoApi.start();
             kakaoApi.join();
-            address = new Address(kakaoApi.br.readLine());
+            address = new Address(kakaoApi.br.readLine(),query);
         }catch (Exception e){
             e.printStackTrace();
         }

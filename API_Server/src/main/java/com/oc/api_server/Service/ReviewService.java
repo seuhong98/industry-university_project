@@ -28,79 +28,72 @@ public class ReviewService {
         this.getSequence = getSequence;
     }
 
-    public String getCurrentList(){
-        StringBuffer sb = new StringBuffer();
-        List<SimpleReview> list = simpleReview.getCurrent();
-        for(SimpleReview get : list){
-            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
-        }
-        return sb.toString();
-    }
-
-    public String getList(Long id){
-        StringBuffer sb = new StringBuffer();
-        List<SimpleReview> list = simpleReview.getList(id);
-        for(SimpleReview get : list){
-            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
-        }
-        return sb.toString();
-    }
-
-    public String getCurrentListByPlace(Integer place){
-        StringBuffer sb = new StringBuffer();
-        List<SimpleReview> list = simpleReview.getCurrentListByPlace(place);
-        for(SimpleReview get : list){
-            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
-        }
-        return sb.toString();
-    }
-    public String getListByPlace(Integer place,Long id){
-        StringBuffer sb = new StringBuffer();
-        List<SimpleReview> list = simpleReview.getListByPlace(place,id);
-        for(SimpleReview get : list){
-            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
-        }
-        return sb.toString();
-    }
-
-
-    public String getCurrentListByRating(){
-        StringBuffer sb = new StringBuffer();
-        List<SimpleReview> list = simpleReview.getCurrentListByRating();
-        for(SimpleReview get : list){
-            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
-        }
-        return sb.toString();
-    }
-    public String getListByRating(Long id){
-        StringBuffer sb = new StringBuffer();
-        List<SimpleReview> list = simpleReview.getListByRating(id);
-        for(SimpleReview get : list){
-            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
-        }
-        return sb.toString();
-    }
-
-    public String getMyList(Long id){
-        StringBuffer sb = new StringBuffer();
-        List<SimpleReview> list = simpleReview.getMyList(id);
-        for(SimpleReview get : list){
-            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
-        }
-        return sb.toString();
-    }
+//    public String getCurrentList(){
+//        StringBuffer sb = new StringBuffer();
+//        List<SimpleReview> list = simpleReview.getCurrent();
+//        for(SimpleReview get : list){
+//            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
+//        }
+//        return sb.toString();
+//    }
+//
+//    public String getList(Long id){
+//        StringBuffer sb = new StringBuffer();
+//        List<SimpleReview> list = simpleReview.getList(id);
+//        for(SimpleReview get : list){
+//            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
+//        }
+//        return sb.toString();
+//    }
+//
+//    public String getCurrentListByPlace(Integer place){
+//        StringBuffer sb = new StringBuffer();
+//        List<SimpleReview> list = simpleReview.getCurrentListByPlace(place);
+//        for(SimpleReview get : list){
+//            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
+//        }
+//        return sb.toString();
+//    }
+//    public String getListByPlace(Integer place,Long id){
+//        StringBuffer sb = new StringBuffer();
+//        List<SimpleReview> list = simpleReview.getListByPlace(place,id);
+//        for(SimpleReview get : list){
+//            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
+//        }
+//        return sb.toString();
+//    }
+//
+//
+//    public String getCurrentListByRating(){
+//        StringBuffer sb = new StringBuffer();
+//        List<SimpleReview> list = simpleReview.getCurrentListByRating();
+//        for(SimpleReview get : list){
+//            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
+//        }
+//        return sb.toString();
+//    }
+//    public String getListByRating(Long id){
+//        StringBuffer sb = new StringBuffer();
+//        List<SimpleReview> list = simpleReview.getListByRating(id);
+//        for(SimpleReview get : list){
+//            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
+//        }
+//        return sb.toString();
+//    }
+//
+//    public String getMyList(Long id){
+//        StringBuffer sb = new StringBuffer();
+//        List<SimpleReview> list = simpleReview.getMyList(id);
+//        for(SimpleReview get : list){
+//            sb.append(dataMapper.SimpleReviewSerialization(get)+ListSeparator);
+//        }
+//        return sb.toString();
+//    }
 
     public void saveReview(String[] data, long id){
-        StringBuffer sb = new StringBuffer();
-        long review_id = getSequence.nextReview1_id();
         Review review = dataMapper.ReviewDeserialization(data);
-        review.setId(review_id);
         review.setReview_owner(id);
-        SimpleReview simple = dataMapper.SimpleReviewDeserialization(data);
-        simple.setId(review_id);
-        simple.setReview_owner(id);
         repository.SaveReview(review);
-        simpleReview.saveReview(simple);
     }
 
 

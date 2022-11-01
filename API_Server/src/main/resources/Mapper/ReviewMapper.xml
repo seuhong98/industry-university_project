@@ -7,14 +7,12 @@
         insert into review
         values
             (
-                #{id},
-                #{title longtext},
+                NEXTVAL('user_id'),
+                #{title},
                 #{preview},
 
-                #{is_image},
-                #{simple_image},
-
                 #{main},
+                #{image_txt},
 
                 #{address},
                 #{x},
@@ -23,15 +21,20 @@
                 #{review_type},
                 #{guarantee},
                 #{money},
-                #{management},
 
                 #{good},
 
                 #{review_owner},
 
                 #{owner_rating},
+                #{size_room},
+                #{noise},
+                #{service},
+                #{hygiene},
+                #{safety},
+                #{temperature},
 
-                #{create_day}
+                now()
             )
     </insert>
 

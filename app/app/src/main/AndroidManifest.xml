@@ -53,6 +53,11 @@
             android:exported="true">
         </activity>
 
+        <activity
+            android:name=".Activity.Review.RatingActivity"
+            android:exported="true">
+        </activity>
+
 
 
 
