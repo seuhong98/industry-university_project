@@ -18,8 +18,8 @@ public class UserService {
      * 회원가입 요청
      * @return
      */
-    public boolean SignUp(String email, String nickname, String pw, byte use_agree, byte security_agree, byte marketing_agree, byte age_agree){
-        ur.CreateUser(security.TwoWayEncrypt(email),nickname,security.makeOneWayEncrypt(pw),use_agree,security_agree,marketing_agree,age_agree);
+    public boolean SignUp(String email, String nickname, String pw, byte use_agree, byte security_agree, byte marketing_agree, byte age_agree, int uni_code){
+        ur.CreateUser(security.TwoWayEncrypt(email),nickname,security.makeOneWayEncrypt(pw),use_agree,security_agree,marketing_agree,age_agree,uni_code);
         return CheckIsUniqueEmail(email);
     }
 
@@ -45,17 +45,9 @@ public class UserService {
 
     /**
      * 탈퇴 하기 기능
-     * @param PW plain 비밀번호
-     * @param Email 이메일
-     * @return 성공여부 보내기(비밀번호가 틀려도 실행)
      */
-    public boolean Resign(String PW, String Email){
-        if(SingIn(PW,Email) != null){
-            ur.DeleteUser(Email);
-            return true;
-        }else{
-            return false;
-        }
+    public void Resign(Long uid){
+        ur.DeleteUser(uid);
     }
 
     /**

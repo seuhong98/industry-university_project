@@ -48,6 +48,7 @@
             android:exported="true">
         </activity>
 
+
         <activity
             android:name=".Activity.Login.SingUp"
             android:exported="true">
@@ -58,6 +59,11 @@
             android:exported="true">
         </activity>
 
+        <activity
+            android:name=".Activity.Review.DetailActivity"
+            android:exported="true">
+        </activity>
+
 
 
 
@@ -65,6 +71,43 @@
             android:name=".Activity.Main.MainActivity"
             android:exported="true">
         </activity>
+
+        <activity
+            android:name=".Activity.Main.FilterActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Activity.Main.StettingActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Activity.Main.ShowSettingActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Activity.Main.ChangePwActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Activity.Main.ChangeNicknameActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Activity.Main.MapActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Activity.Main.ShowMapActivity"
+            android:exported="true">
+        </activity>
+
+
 
 
 

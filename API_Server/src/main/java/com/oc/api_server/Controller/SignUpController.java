@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/signup")
@@ -113,6 +115,13 @@ public class SignUpController {
         if(signUpData == null){
             signUpData = new SignUpData();
         }
+        if(param[0].contains("관리자")||param[0].contains("admin")||param[0].contains("씨발")||param[0].contains("병신")
+                ||param[0].contains("tlqkf")||param[0].contains("Tlqkf")||param[0].contains("qudtls")
+                ||param[0].toLowerCase().contains("fuck")){
+            signUpData.setNickName_Certification(false);
+            return security.encryptionBySessionKey("FALSE",(String)session.getAttribute("SessionKey"));
+        }
+
         if(ur.CheckIsUniqueNickname(param[0])){
             signUpData.setNickName(param[0]);
             signUpData.setNickName_Certification(true);
@@ -137,7 +146,11 @@ public class SignUpController {
         if(signUpData == null || !signUpData.isCode_Certification() || !signUpData.isNickName_Certification()){
             return security.encryptionBySessionKey("Cheating",(String)session.getAttribute("SessionKey"));
         }
-        if(!ur.SignUp(signUpData.getEmail(),signUpData.getNickName(),param[0],Byte.parseByte(param[1]),Byte.parseByte(param[2]),Byte.parseByte(param[3]),Byte.parseByte(param[4]))){
+        if(param[0].length()<8){
+            return security.encryptionBySessionKey("Err",(String)session.getAttribute("SessionKey"));
+        }
+        String c = signUpData.getEmail().split("@")[1];
+        if(!ur.SignUp(signUpData.getEmail(),signUpData.getNickName(),param[0],Byte.parseByte(param[1]),Byte.parseByte(param[2]),Byte.parseByte(param[3]),Byte.parseByte(param[4]),data.getUniCode(c))){
             session.removeAttribute("SignUpData");
             return security.encryptionBySessionKey("True",(String)session.getAttribute("SessionKey"));
         }else{

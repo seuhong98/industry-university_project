@@ -6,6 +6,7 @@ import java.security.interfaces.RSAPublicKey;
 import java.util.Map;
 
 public interface MemoryInterface {
+
     public String GetKakaoKey();
     public String URL();
 
@@ -48,4 +49,9 @@ public interface MemoryInterface {
     public String getUniName();
 
     public void setUniName(String uniName);
+
+    public double getUni_y();
+    public double getUni_x();
+
+    public int UniAddressSize();
 }

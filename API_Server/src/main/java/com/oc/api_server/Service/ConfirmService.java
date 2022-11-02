@@ -13,8 +13,9 @@ public class ConfirmService {
     public String[] Data(HttpSession session, String params, String signature){
         params = ConvertNormalToSpecial(params);
         signature = ConvertNormalToSpecial(signature);
+        System.out.println(params);
         params = security.decryptionBySessionKey(params,(String)session.getAttribute("SessionKey"));
-        System.out.println("인증 서비스에서 온거 : "+params);
+        System.out.println(params);
         if(signature.equals(security.Signature(params,(int)session.getAttribute("Count")))){
             session.setAttribute("Count",((int)session.getAttribute("Count")+1));
         }else{

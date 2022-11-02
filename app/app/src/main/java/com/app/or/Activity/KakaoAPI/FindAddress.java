@@ -34,6 +34,7 @@ public class FindAddress extends AppCompatActivity {
 
     Button AddressFind;
     Button AddressSubmit;
+    Button backward_review;
 
     Context context;
     Address address;
@@ -47,6 +48,7 @@ public class FindAddress extends AppCompatActivity {
         AddressText = findViewById(R.id.AddressText);
         AddressFind = findViewById(R.id.AddressFind);
         AddressSubmit = findViewById(R.id.AddressSubmit);
+        backward_review = findViewById(R.id.backward_review);
         mapView = new MapView(this);
 
         ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
@@ -94,5 +96,13 @@ public class FindAddress extends AppCompatActivity {
                 finish();
             }
         });
+
+        backward_review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
     }
 }

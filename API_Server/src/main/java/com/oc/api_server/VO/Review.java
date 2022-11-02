@@ -26,7 +26,7 @@ public class Review {
     String image_txt;
 
     /*
-    효자1동 : 0 , 효자2동 : 1, 효자3동 : 2, 후평2동 : 3, 후평3동 : 4, 석사동 : 5, 거두리 : 6, 기숙사 : 7, 기타 : 8
+    효자1동 : 0 , 효자2동 : 1, 효자3동 : 2, 후평2동 : 3, 후평3동 : 4, 석사동 : 5, 거두리 : 6, 기숙사 : 7, 기타 : 999
      */
     Integer address;
     Double x; //x축
@@ -54,4 +54,7 @@ public class Review {
     Float temperature;//냉난방
 
     String create_day; //생성 날짜
+
+    String input_address;
+
 }

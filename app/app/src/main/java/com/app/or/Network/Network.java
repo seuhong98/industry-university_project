@@ -4,9 +4,12 @@ import android.os.StrictMode;
 
 import com.app.or.Config.Universal;
 import com.app.or.DTO.Address;
+import com.app.or.DTO.Review;
+import com.app.or.DTO.SimpleReview;
 import com.app.or.FileSystem.FileSystem;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Network {
@@ -120,7 +123,33 @@ public class Network {
         }
     }
 
-    public List<String[]> RequestArray(String Request, List<String> Params){
+//    public List<String[]> RequestArray(String Request, List<String> Params){
+//        try {
+//            if(System.currentTimeMillis() - beforeTime > Universal.memory.getSessionTime()){
+//                MakeSession();
+//                AutoLogin();
+//            }
+//            beforeTime = System.currentTimeMillis();
+//            GetConnection getConnection = new GetConnection(Request,Params,true);
+//            getConnection.start();
+//            getConnection.join();
+//            String[] read = getConnection.data.split(UnListSeparator);
+//            if(getConnection.answer){
+//                List<String[]> answer = new ArrayList<>();
+//                for(String t :read){
+//                    answer.add(t.split(UnSeparator));
+//                }
+//                return answer;
+//            }else {
+//                return null;
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
+
+    public List<SimpleReview> RequestSimpleReview(String Request, List<String> Params){
         try {
             if(System.currentTimeMillis() - beforeTime > Universal.memory.getSessionTime()){
                 MakeSession();
@@ -131,12 +160,37 @@ public class Network {
             getConnection.start();
             getConnection.join();
             String[] read = getConnection.data.split(UnListSeparator);
+            List<SimpleReview> reviews = new ArrayList<>();
             if(getConnection.answer){
-                List<String[]> answer = new ArrayList<>();
                 for(String t :read){
-                    answer.add(t.split(UnSeparator));
+                    if(t.length() > 0){
+                        reviews.add(Universal.dataMapper.SimpleReviewDeserialization(t.split(UnSeparator)));
+                    }
                 }
-                return answer;
+                return reviews;
+            }else {
+                return null;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Review RequestReview(String Request, List<String> Params){
+        try {
+            if(System.currentTimeMillis() - beforeTime > Universal.memory.getSessionTime()){
+                MakeSession();
+                AutoLogin();
+            }
+            beforeTime = System.currentTimeMillis();
+            GetConnection getConnection = new GetConnection(Request,Params,true);
+            getConnection.start();
+            getConnection.join();
+            String[] read = getConnection.data.split(UnSeparator);
+            Review review = Universal.dataMapper.ReviewDeserialization(read);
+            if(getConnection.answer){
+                return review;
             }else {
                 return null;
             }

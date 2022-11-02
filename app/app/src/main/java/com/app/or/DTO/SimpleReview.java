@@ -6,13 +6,22 @@ public class SimpleReview {
     String preview;
     Integer good; //좋아요 수
     Float owner_rating; //사용자 총점
-    int where;
+    Integer where;
+    String CreateTime;
 
-    public int getWhere() {
+    public String getCreateTime() {
+        return CreateTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        CreateTime = createTime;
+    }
+
+    public Integer getWhere() {
         return where;
     }
 
-    public void setWhere(int where) {
+    public void setWhere(Integer where) {
         this.where = where;
     }
 

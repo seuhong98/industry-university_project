@@ -88,6 +88,14 @@ public class Address implements Parcelable {
         return y;
     }
 
+    public String getSearchTxt() {
+        return SearchTxt;
+    }
+
+    public void setSearchTxt(String searchTxt) {
+        SearchTxt = searchTxt;
+    }
+
     public boolean isNull(){
         boolean isn = false;
         isn = address1==null ? true: false;

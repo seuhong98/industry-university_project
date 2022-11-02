@@ -31,6 +31,7 @@ import com.app.or.R;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -63,6 +64,7 @@ public class ReviewWriteActivity extends AppCompatActivity {
     Address addressData;
 
     List<Bitmap> SaveImage = new ArrayList<>();
+
 
 
     int[] imageId = {
@@ -149,13 +151,13 @@ public class ReviewWriteActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(review_title.length() == 0){
                     Toast.makeText(getApplicationContext(),"제목을 입력해주세요",Toast.LENGTH_SHORT).show();
-                }else if(month.isActivated()&&(review_all_money.length()==0||review_month_money.length()==0)){
+                }else if(month.isChecked()&&(review_all_money.length()==0||review_month_money.length()==0)){
                     Toast.makeText(getApplicationContext(),"보증금과 월세(+관리비) 모두 입력해주세요",Toast.LENGTH_SHORT).show();
-                }else if(year.isActivated()&&(review_all_money2.length()==0||review_month_money2.length()==0)){
+                }else if(year.isChecked()&&(review_all_money2.length()==0||review_month_money2.length()==0)){
                     Toast.makeText(getApplicationContext(),"전세금과 관리비 모두 입력해주세요",Toast.LENGTH_SHORT).show();
                 }else if(Text.length()<5){
                     Toast.makeText(getApplicationContext(),"5글자 이상 부탁 드립니다.",Toast.LENGTH_SHORT).show();
-                }else if(addressData == null || addressData.isNull()){
+                }else if(!school.isChecked()&&(addressData == null || addressData.isNull())){
                     Toast.makeText(getApplicationContext(),"주소 선택으로 주소를 지정해주세요.",Toast.LENGTH_SHORT).show();
                 }else{
                     Intent intent = new Intent(getApplicationContext(), RatingActivity.class);
@@ -266,37 +268,51 @@ public class ReviewWriteActivity extends AppCompatActivity {
             review.setSafety(read[4].equals("null") ? null : Float.parseFloat(read[4]));
             review.setTemperature(read[5].equals("null") ? null : Float.parseFloat(read[5]));
 
-            if(month.isActivated()){
+            if(month.isChecked()){
                 review.setReview_type(0);
                 review.setGuarantee(Integer.parseInt(review_all_money.getText().toString()));
                 review.setMoney(Integer.parseInt(review_month_money.getText().toString()));
-            }else if(year.isActivated()){
+                review.setX(addressData.getX());
+                review.setY(addressData.getY());
+                review.setInput_address(addressData.getSearchTxt());
+                if(Universal.memory.RegionToCode(addressData.getAddress1()) != null){
+                    review.setAddress(Universal.memory.RegionToCode(addressData.getAddress1()));
+                }else{
+                    review.setAddress(999);
+                }
+            }else if(year.isChecked()){
                 review.setReview_type(1);
                 review.setGuarantee(Integer.parseInt(review_all_money2.getText().toString()));
                 review.setMoney(Integer.parseInt(review_month_money2.getText().toString()));
+                review.setX(addressData.getX());
+                review.setY(addressData.getY());
+                review.setInput_address(addressData.getSearchTxt());
+                if(Universal.memory.RegionToCode(addressData.getAddress1()) != null){
+                    review.setAddress(Universal.memory.RegionToCode(addressData.getAddress1()));
+                }else{
+                    review.setAddress(999);
+                }
             }else{
                 review.setReview_type(3);
+                review.setY(Universal.memory.getUni_y());
+                review.setX(Universal.memory.getUni_x());
+                review.setInput_address("기숙사");
+                review.setAddress(Universal.memory.RegionToCode("기숙사"));
             }
-            if(Universal.memory.RegionToCode(addressData.getAddress1()) != null){
-                review.setAddress(Universal.memory.RegionToCode(addressData.getAddress1()));
-            }else{
-                review.setAddress(999);
-            }
-
-            review.setX(addressData.getX());
-            review.setY(addressData.getY());
 
             review.setMain(Text.getText().toString());
-            if(Text.length()>10){
-                review.setPreview(Text.getText().toString().substring(0,9));
+            if(Text.getText().toString().split("\\n")[0].length()>10){
+                review.setPreview((Text.getText().toString().split("\\n")[0]).substring(0,9)+"...");
             }else{
-                review.setPreview(Text.getText().toString());
+                review.setPreview(Text.getText().toString().split("\\n")[0]);
             }
             review.setTitle(review_title.getText().toString());
             review.setImage_txt(SaveImage);
 
+
             Universal.NETWORK.Request("Review/saveReview",Universal.dataMapper.ReviewSerialization(review));
             finish();
+
         }
     }
 }

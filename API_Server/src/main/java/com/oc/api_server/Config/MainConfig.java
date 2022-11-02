@@ -28,13 +28,6 @@ public class MainConfig implements WebMvcConfigurer {
     @Autowired
     private SessionRepository sessionRepository;
 
-    @Autowired
-    private GetSequence getSequence;
-
-    @Autowired
-    private SimpleReviewRepository simpleReviewRepository;
-
-
 
 
     //서비스=========================================================================================================
@@ -51,7 +44,7 @@ public class MainConfig implements WebMvcConfigurer {
 
     @Bean
     public ReviewService reviewService(){
-        return new ReviewService(reviewRepository,simpleReviewRepository,getSequence);
+        return new ReviewService(reviewRepository);
     }
 
     @Bean

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -313,6 +314,26 @@ public class SingUp extends AppCompatActivity {
                 }
             }
         });
+        signup_pw.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if(CheckAllWrite()){
+                    signup_bt.setEnabled(true);
+                    signup_bt.setBackground(getDrawable(R.drawable.signup_bt));
+                }
+                return false;
+            }
+        });
+        signup_pw_check.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if(CheckAllWrite()){
+                    signup_bt.setEnabled(true);
+                    signup_bt.setBackground(getDrawable(R.drawable.signup_bt));
+                }
+                return false;
+            }
+        });
 
 
 
@@ -320,8 +341,8 @@ public class SingUp extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 signup_bt.setEnabled(false);
-                if(signup_pw.getText().toString().length()==0){
-                    Toast.makeText(getApplicationContext(),"비밀번호를 입력해주세요",Toast.LENGTH_SHORT).show();
+                if(signup_pw.getText().toString().length()<7){
+                    Toast.makeText(getApplicationContext(),"비밀번호를 8자리 이상 입력해주세요",Toast.LENGTH_SHORT).show();
                     signup_bt.setEnabled(true);
                 }else if(!signup_pw.getText().toString().equals(signup_pw_check.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "비밀번호가 맞지 않습니다", Toast.LENGTH_SHORT).show();
@@ -353,6 +374,6 @@ public class SingUp extends AppCompatActivity {
     }
 
     public boolean CheckAllWrite(){
-        return isCheckEmail&&isCheckNickname&&(signup_pw.getText().toString().length()>0)&&(signup_pw.getText().toString().equals(signup_pw_check.getText().toString()))&&prime_agree.isChecked()&&security_agree.isChecked()&&age_agree.isChecked();
+        return isCheckEmail&&isCheckNickname&&(signup_pw.getText().toString().length()>0)&&prime_agree.isChecked()&&security_agree.isChecked()&&age_agree.isChecked();
     }
 }

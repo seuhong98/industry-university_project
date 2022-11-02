@@ -15,12 +15,12 @@ public interface UserRepository {
      * @param email
      * @return
      */
-    void CreateUser(String email, String nickname, String pw, byte use_agree, byte security_agree, byte marketing_agree, byte age_agree);
+    void CreateUser(String email, String nickname, String pw, byte use_agree, byte security_agree, byte marketing_agree, byte age_agree, int uni_code);
 
     // public boolean UpdateUser();
 
 
-    void DeleteUser(String Email);
+    void DeleteUser(Long uid);
 
     OrUser findByEmail(String Email);
 

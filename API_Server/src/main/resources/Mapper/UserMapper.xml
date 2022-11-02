@@ -4,12 +4,12 @@
 
 <mapper namespace="com.oc.api_server.Repository.UserRepository">
     <insert id="CreateUser">
-        INSERT INTO or_user  (id,email,nickname,pw,use_agree,security_agree,marketing_agree,age_agree)
-            VALUES (NEXTVAL('user_id'),#{email},#{nickname},#{pw},#{use_agree},#{security_agree},#{marketing_agree},#{age_agree});
+        INSERT INTO or_user
+            VALUES (NEXTVAL('user_id'),#{email},#{nickname},#{pw},#{use_agree},#{security_agree},#{marketing_agree},#{age_agree},#{uni_code});
     </insert>
 
     <delete id="DeleteUser">
-        DELETE FROM or_user WHERE email = #{email};
+        DELETE FROM or_user WHERE id = #{uid};
     </delete>
 
     <select id="findByEmail" resultType="OrUser">
@@ -17,7 +17,7 @@
     </select>
 
     <update id="SetNickName">
-        UPDATE or_user set nickname = #{want} WHERE id= #{id};
+        UPDATE or_user set nickname = #{Want} WHERE id= #{id};
     </update>
 
     <update id="SetPw">

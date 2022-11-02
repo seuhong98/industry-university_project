@@ -7,38 +7,144 @@
         insert into review
         values
             (
-                NEXTVAL('user_id'),
-                #{title},
-                #{preview},
+                NEXTVAL('review_id'),
+                #{review.title},
+                #{review.preview},
 
-                #{main},
-                #{image_txt},
+                #{review.main},
+                #{review.image_txt},
 
-                #{address},
-                #{x},
-                #{y},
+                #{review.address},
+                #{review.x},
+                #{review.y},
 
-                #{review_type},
-                #{guarantee},
-                #{money},
+                #{review.review_type},
+                #{review.guarantee},
+                #{review.money},
 
-                #{good},
+                #{review.good},
 
-                #{review_owner},
+                #{review.review_owner},
 
-                #{owner_rating},
-                #{size_room},
-                #{noise},
-                #{service},
-                #{hygiene},
-                #{safety},
-                #{temperature},
+                #{review.owner_rating},
+                #{review.size_room},
+                #{review.noise},
+                #{review.service},
+                #{review.hygiene},
+                #{review.safety},
+                #{review.temperature},
 
-                now()
+                now(),
+
+                #{review.input_address},
+                0,
+                0,
+                #{uni_code}
             )
     </insert>
 
     <select id="getReview" resultType="Review">
-        select * from review WHERE s.id = #{id}
+        select
+            s.id,s.title,s.preview,s.main,s.image_txt,
+            s.address,s.x,s.y,s.review_type,s.guarantee,s.money,
+            s.good,s.review_owner,s.owner_rating,s.size_room,
+            s.noise,s.service,s.hygiene,s.safety,s.temperature,
+            s.create_day,s.input_address
+        from review s WHERE s.id = #{id} and s.stop_code != 1 and uni_code = #{uni_code};
     </select>
+
+    <select id="getMyGood" resultType="SimpleReview">
+        select r.id ,r.title ,r.preview ,r.good ,r.owner_rating , r.address, r.create_day
+        from review r
+        where r.stop_code != 1
+        and r.id in (select g.review_id  from good g where g.user_id = #{uid})
+        order by id DESC
+    </select>
+
+    <select id="getMyCurrent" resultType="SimpleReview">
+        select r.id ,r.title ,r.preview ,r.good ,r.owner_rating , r.address, r.create_day  from review r where r.stop_code != 1 and review_owner = #{uid} order by id DESC;
+    </select>
+
+    <select id="getCurrent" resultType="SimpleReview">
+        select r.id ,r.title ,r.preview ,r.good ,r.owner_rating , r.address, r.create_day  from review r where r.stop_code != 1 and uni_code = #{uni_code} order by id DESC;
+    </select>
+
+    <select id="getFilterList" resultType="SimpleReview">
+        select r.id ,r.title ,r.preview ,r.good ,r.owner_rating , r.address, r.create_day  from review r
+        where r.stop_code != 1 and uni_code = #{uni_code}
+        and address in (
+            <foreach collection="list" item="item" separator=",">
+                #{item}
+            </foreach>
+            )
+        <choose>
+            <when test='order.equals("1")'>
+                order by good DESC
+            </when>
+            <when test='order.equals("2")'>
+                order by owner_rating DESC nulls last
+            </when>
+            <otherwise>
+                order by id DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    
+    <update id="Good">
+        update review
+        set good = good +1
+        where id = #{id}
+    </update>
+
+    <insert id="Good_Count">
+        insert into good
+        values(
+                  #{id},
+                  #{uid}
+              )
+    </insert>
+
+    <select id="is_good" resultType="int">
+        select count(*) from good where review_id = #{id} and user_id = #{uid}
+    </select>
+
+    <update id="Bad">
+        update review
+        set bad = bad +1
+        where id = #{id}
+    </update>
+
+    <insert id="Bad_Count">
+        insert into bad
+        values(
+                  #{id},
+                  #{uid}
+              )
+    </insert>
+
+    <select id="is_Bad" resultType="int">
+        select count(*) from bad where review_id = #{id} and user_id = #{uid}
+    </select>
+
+    <delete id="Delete">
+        delete from review where id = #{id} and review_owner = #{uid}
+    </delete>
+
+    <select id="GetNickName" resultType="String" >
+        select r.nickname  from or_user r where r.id = #{uid} LIMIT 1
+    </select>
+
+    <select id="getXY" resultType="XY" >
+        select x,y from review where uni_code = #{uni_code} group by x,y
+    </select>
+
+    <select id="GetXYList" resultType="SimpleReview">
+        select r.id ,r.title ,r.preview ,r.good ,r.owner_rating , r.address, r.create_day
+        from review r
+        where r.stop_code != 1
+        and ROUND(CAST(x AS numeric),4) = round(CAST(#{x} AS numeric),4) and round(CAST(y AS numeric),4) = round(CAST(#{y} AS numeric),4)
+        order by id DESC;
+    </select>
+
 </mapper>

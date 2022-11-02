@@ -53,11 +53,11 @@
                     android:layout_weight="15"/>
 
                 <Button
+                    android:id="@+id/main_menu"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="70"
-                    android:background="@drawable/main_menu"
-                    android:id="@+id/main_menu"/>
+                    android:background="@drawable/main_menu" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -139,7 +139,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="13"
-                android:background="@drawable/main_write_bt"/>
+                android:background="@drawable/main_write_bt"
+                android:id="@+id/main_write_bt"/>
         </LinearLayout>
 
 

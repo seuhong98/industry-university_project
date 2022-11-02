@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.app.or.Config.Universal;
@@ -50,6 +51,7 @@ public class ListViewAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.review_list, viewGroup, false);
 
         }
+
         TextView list_where  = view.findViewById(R.id.list_where);
         TextView list_title  = view.findViewById(R.id.list_title);
         TextView list_body  = view.findViewById(R.id.list_body);
@@ -58,11 +60,15 @@ public class ListViewAdapter extends BaseAdapter {
 
         SimpleReview temp = list.get(i);
 
-        list_where.setText(Universal.memory.CodeToRegion(temp.getWhere()));
+        list_where.setText(Universal.memory.CodeToRegion(temp.getWhere())+"  "+temp.getCreateTime());
         list_title.setText((temp.getTitle().length()>10) ? temp.getTitle().substring(0,9)+"..." : temp.getTitle());
         list_body.setText(temp.getPreview());
-        list_good_cnt.setText(temp.getGood());
-        list_score.setText(String.format("%.1f", temp.getOwner_rating()));
+        list_good_cnt.setText(""+temp.getGood());
+        if(temp.getOwner_rating() != null){
+            list_score.setText("총 별점 : "+String.format("%.1f", temp.getOwner_rating()));
+        }else {
+            list_score.setText("별점 없음");
+        }
         return view;
 
     }

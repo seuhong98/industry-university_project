@@ -22,7 +22,9 @@ public class OrUser {
     Byte marketing_agree; //마케팅
     Byte age_agree; //만 14세 이상
 
-    public OrUser(long id, String email, String nickname, String pw, byte use_agree, byte security_agree, byte marketing_agree, byte age_agree) {
+    int uni_code;
+
+    public OrUser(Long id, String email, String nickname, String pw, Byte use_agree, Byte security_agree, Byte marketing_agree, Byte age_agree, int uni_code) {
         this.id = id;
         this.email = email;
         this.nickname = nickname;
@@ -31,5 +33,6 @@ public class OrUser {
         this.security_agree = security_agree;
         this.marketing_agree = marketing_agree;
         this.age_agree = age_agree;
+        this.uni_code = uni_code;
     }
 }

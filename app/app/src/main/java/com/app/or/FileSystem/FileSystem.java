@@ -21,6 +21,12 @@ public class FileSystem {
 
 
     // 계정 관련
+    public void DeleteAccount(){
+        File file = new File(Universal.memory.getFileDir() +"AccountData.txt" );
+        if(file.exists()){
+            file.delete();
+        }
+    }
     public String[] GetAccount(){
         try {
             BufferedReader reader = new BufferedReader(new FileReader(Universal.memory.getFileDir()+"AccountData.txt"));

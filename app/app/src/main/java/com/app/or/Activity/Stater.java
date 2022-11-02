@@ -49,8 +49,12 @@ public class Stater extends AppCompatActivity {
         //화면 지정 -로그인 유무
         Intent intent;
         if( Universal.fileSystem.isAccount() ){
-            Universal.NETWORK.AutoLogin();
-            intent = new Intent(getApplicationContext(), MainActivity.class);
+            if(Universal.NETWORK.AutoLogin().equals("TRUE")){
+                intent = new Intent(getApplicationContext(), MainActivity.class);
+            }else{
+                intent = new Intent(getApplicationContext(), Login.class);
+            }
+
         }else{
             intent = new Intent(getApplicationContext(), Login.class);
         }

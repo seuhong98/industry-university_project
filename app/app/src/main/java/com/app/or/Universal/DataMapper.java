@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DataMapper {
@@ -23,15 +24,15 @@ public class DataMapper {
         review.setPreview(data[2].equals("null") ? null : data[2]);
         review.setMain(data[3].equals("null") ? null : data[3]);
 
-        if(data[4].equals("null")){
-            review.setImage_txt(null);
-        }else{
+        List<Bitmap> answer = new ArrayList<>();
+        if(!data[4].equals("null")){
             String[] read = data[4].split(UnSep);
-            List<Bitmap> answer = new ArrayList<>();
             for(String t : read){
                 answer.add(Universal.imageHelper.StringToImage(t));
             }
+            review.setImage_txt(null);
         }
+        review.setImage_txt(answer);
 
         review.setAddress(data[5].equals("null") ? null : Integer.parseInt(data[5]));
         review.setX(data[6].equals("null") ? null : Double.parseDouble(data[6]));
@@ -52,7 +53,11 @@ public class DataMapper {
         review.setSafety(data[18].equals("null") ? null : Float.parseFloat(data[18]));
         review.setTemperature(data[19].equals("null") ? null : Float.parseFloat(data[19]));
 
-        review.setCreate_day(data[20].equals("null") ? null : data[20]);
+        review.setCreate_day(data[20].equals("null") ? null : data[20].substring(0,11));
+
+        review.setInput_address(data[21].equals("null") ? null : data[21]);
+        review.setOwn(Boolean.parseBoolean(data[22]));
+        review.setNickname(data[23]);
         return review;
     }
 
@@ -94,6 +99,8 @@ public class DataMapper {
         array.add(review.getTemperature()+"");
         array.add(review.getCreate_day()+"");
 
+        array.add(review.getInput_address());
+
         return array;
     }
 
@@ -104,6 +111,8 @@ public class DataMapper {
         review.setPreview(data[2].equals("null") ? null : data[2]);
         review.setGood(data[3].equals("null") ? null : Integer.parseInt(data[3]));
         review.setOwner_rating(data[4].equals("null") ? null : Float.parseFloat(data[4]));
+        review.setWhere(data[5].equals("null") ? null : Integer.parseInt(data[5]));
+        review.setCreateTime(data[6].equals("null") ? null : data[6].substring(0,11));
         return review;
     }
 }

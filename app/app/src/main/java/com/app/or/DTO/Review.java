@@ -2,6 +2,7 @@ package com.app.or.DTO;
 
 import android.graphics.Bitmap;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Review {
@@ -43,9 +44,42 @@ public class Review {
 
     String create_day; //생성 날짜
 
+    String input_address;
+
+    Boolean own;
+
+    String nickname;
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public Boolean getOwn() {
+        return own;
+    }
+
+    public void setOwn(Boolean own) {
+        this.own = own;
+    }
+
+    public String getInput_address() {
+        return input_address;
+    }
+
+    public void setInput_address(String input_address) {
+        this.input_address = input_address;
+    }
 
     public List<Bitmap> getImage_txt() {
-        return image_txt;
+        if(image_txt != null){
+            return image_txt;
+        }else{
+           return new ArrayList<Bitmap>();
+        }
     }
 
     public void setImage_txt(List<Bitmap> image_txt) {

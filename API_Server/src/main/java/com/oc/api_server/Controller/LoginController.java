@@ -67,48 +67,57 @@ public class LoginController {
 
     /**
      * 회원 탈퇴
-     * @param Pw 비밀번호
-     * @param Email 이메일
      * @param request
      * @return
      */
     @PostMapping("/Resign")
     @ResponseBody
-    public String Resign(String Pw, String Email, HttpServletRequest request){
+    public String Resign(String Signature,String params, HttpServletRequest request){
         HttpSession session = request.getSession();
+        String[] param = confirm.Data(session,params,Signature);
+        if(param == null){
+            return security.encryptionBySessionKey("Deodorization",(String)session.getAttribute("SessionKey"));
+        }
+        String lastKey = (String)session.getAttribute("SessionKey");
         try{
-            if(uService.Resign(Pw,Email)){
-                session.removeAttribute("User");
-                return "TRUE";
-            }else{
-                return "Wrong";
-            }
+            uService.Resign(((OrUser)session.getAttribute("User")).getId());
+            session.invalidate();
+            return security.encryptionBySessionKey("GoodByeThankYou",lastKey);
         }catch (Exception e){
-            return "ERR";
+            e.printStackTrace();
+            return security.encryptionBySessionKey("ERR",lastKey);
         }
     }
 
 
     /**
      * 닉네임 변경
-     * @param Want 원하는것
      * @param request
      * @return
      */
     @PostMapping("/SetNickName")
     @ResponseBody
-    public String SetNickName(String Want,HttpServletRequest request){
+    public String SetNickName(String Signature,String params, HttpServletRequest request){
         HttpSession session = request.getSession();
-        if((OrUser)session.getAttribute("User") != null){
-            uService.SetNickName(((OrUser)(session.getAttribute("User"))).getId(),Want);
-            return "Done";
+        String[] param = confirm.Data(session,params,Signature);
+        if(param == null){
+            return security.encryptionBySessionKey("Deodorization",(String)session.getAttribute("SessionKey"));
+        }
+        if(uService.CheckIsUniqueNickname(param[0])){
+            try {
+                uService.SetNickName(((OrUser)session.getAttribute("User")).getId(),param[0]);
+                return security.encryptionBySessionKey("Change",(String)session.getAttribute("SessionKey"));
+            }catch (Exception e){
+                e.printStackTrace();
+                return security.encryptionBySessionKey("ERR",(String)session.getAttribute("SessionKey"));
+            }
         }else{
-            return "NeedToLogin";
+            return security.encryptionBySessionKey("Exist",(String)session.getAttribute("SessionKey"));
         }
     }
 
     /**
-     * 비밀번호 변
+     * 비밀번호 변경
      * @return
      */
     @PostMapping("/SetPw")
@@ -119,11 +128,7 @@ public class LoginController {
         if(param == null){
             return security.encryptionBySessionKey("Deodorization",(String)session.getAttribute("SessionKey"));
         }
-        if((OrUser)session.getAttribute("User") != null){
-            uService.SetPw(((OrUser)(session.getAttribute("User"))).getId(),param[0]);
-            return security.encryptionBySessionKey("Done",(String)session.getAttribute("SessionKey"));
-        }else{
-            return security.encryptionBySessionKey("NeedToLogin",(String)session.getAttribute("SessionKey"));
-        }
+        uService.SetPw(((OrUser)(session.getAttribute("User"))).getId(),param[0]);
+        return security.encryptionBySessionKey("Done",(String)session.getAttribute("SessionKey"));
     }
 }
