@@ -40,7 +40,7 @@ public class KakaoApi extends Thread{
 
             conn.setDoOutput(true);
 
-            System.out.println("api query: "+ReQuestQuery);
+
 
             if(conn.getDoOutput()) {
                 conn.getOutputStream().write(("query="+ReQuestQuery).getBytes());

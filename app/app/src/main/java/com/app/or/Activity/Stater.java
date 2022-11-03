@@ -2,20 +2,26 @@ package com.app.or.Activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 
 import com.app.or.Activity.Login.Login;
 import com.app.or.Activity.Main.MainActivity;
 import com.app.or.Config.Universal;
 import com.app.or.FileSystem.FileSystem;
+
+import java.security.MessageDigest;
 
 public class Stater extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.M)

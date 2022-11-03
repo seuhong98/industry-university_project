@@ -75,8 +75,6 @@ public class ReviewController {
         }
         Review review = service.getReview(Long.parseLong(param[0]),((OrUser)session.getAttribute("User")).getUni_code());
 
-        System.out.println((((OrUser)session.getAttribute("User")).getId() == review.getReview_owner()) +"   "+(((OrUser)session.getAttribute("User")).getId() + "  "+ review.getReview_owner() ));
-
         return security.encryptionBySessionKey((dataMapper.ReviewSerialization(review)+(
                 "|Sep|" + (((OrUser)session.getAttribute("User")).getId().equals(review.getReview_owner()))
                 +"|Sep|"+service.GetNickName(review.getReview_owner()))

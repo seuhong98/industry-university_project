@@ -1,11 +1,15 @@
 package com.app.or.Activity.Main;
 
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.os.Build;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -43,10 +47,13 @@ public class MainActivity extends AppCompatActivity {
 
     String search_code = "-1";
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_main);
+        getHashKey();
+
         uni_name = findViewById(R.id.uni_name);
 
         main_menu = findViewById(R.id.main_menu);
@@ -60,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
         drawList(simpleReviews);
 
         uni_name.setText(Universal.memory.getUniName());
+
+        checkPermission();
 
         main_write_bt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
         }else{
             List<String> p = new ArrayList<>();
             p.add(search_code);
-            System.out.println(search_code);
             List<SimpleReview> simpleReviews = Universal.NETWORK.RequestSimpleReview("Review/GetFilterList",p);
             drawList(simpleReviews);
         }
@@ -132,6 +140,44 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void checkPermission(){
+        if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
+        if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+        }
+        if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+        if(checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+        }
+    }
+
+
+    private void getHashKey(){
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (packageInfo == null)
+            Log.e("KeyHash", "KeyHash:null");
+
+        for (Signature signature : packageInfo.signatures) {
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            } catch (Exception e) {
+                Log.e("KeyHash", "Unable to get MessageDigest. signature=" + signature, e);
+            }
         }
     }
 

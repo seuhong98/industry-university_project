@@ -127,7 +127,6 @@ public class DetailActivity extends AppCompatActivity {
         detail_main.setText(review.getMain());
         detail_main.setTextSize(20);
         int i=0;
-        System.out.println(review.getImage_txt().size());
         for(Bitmap bt : review.getImage_txt()){
             image[i].setImageBitmap(bt);
             image[i].setVisibility(View.VISIBLE);

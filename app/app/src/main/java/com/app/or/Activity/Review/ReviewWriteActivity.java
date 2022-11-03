@@ -104,6 +104,13 @@ public class ReviewWriteActivity extends AppCompatActivity {
         //====맵핑 완료 ====//
         count = Universal.memory.getTextBox();
 
+        backward_review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

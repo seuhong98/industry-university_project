@@ -118,7 +118,7 @@ public class GetConnection extends Thread{
             InputStream response = conn.getInputStream();
             InputStreamReader reader = new InputStreamReader(response,"UTF-8");
             String input =  new BufferedReader(reader).readLine();
-            System.out.println("출력 용량 : "+input.getBytes().length+" byte");
+
             data = Universal.security.decryptionBySessionKey(input);
             answer = true;
         }catch (Exception e){
