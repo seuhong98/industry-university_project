@@ -1,6 +1,7 @@
 # 강원대 산학프로젝트
   
 ## 프로젝트 소개 
+  * 원룸 리뷰를 통해 사회 초년생들이 주거 계약에 정보의 불균형을 해결하는 프로젝트
 
 ### 프로젝트명
   * OR
@@ -12,6 +13,7 @@
 [신승호]
   
 ## 개발 환경
- * 데이터베이스 : 5.5.68-MariaDB 
+ * 데이터베이스 : PostgreSQL 14.5 (Ubuntu 14.5-0ubuntu0.22.04.1)
  * 사용중인 언어 : JAVA, XML
  * 개발 툴 : Spring-boot, android studio
+ * 개발 서버 : Intel(R) Core(TM) i5-8500 CPU, 32G RAM
