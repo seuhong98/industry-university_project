@@ -10,6 +10,12 @@ import java.util.StringTokenizer;
 public class ImageHelper {
     public String ImageToString(Bitmap image){
         try {
+
+            long size_t =image.getByteCount();
+            if(size_t>=1000000){
+                long t = size_t/1000000;
+                image = Bitmap.createScaledBitmap(image,(int)(image.getWidth()/t),(int)(image.getHeight()/t),true);
+            }
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             image.compress(Bitmap.CompressFormat.JPEG,100,baos);
             byte[] array = baos.toByteArray();
