@@ -8,3 +8,4 @@ API_Server/src/main/resources/application.properties
 app/app/src/main/java/com/app/or/Memory/Memory.java
 app/app/src/main/java/com/app/or/Security/Security.java
 .DS_Store
+.DS_Store
