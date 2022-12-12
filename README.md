@@ -18,4 +18,4 @@
  * 개발 툴 : Spring-boot, android studio
  * 개발 서버 : Intel(R) Core(TM) i5-8500 CPU, 32G RAM
 
-### [프로토타입 앱 다운로드 하기](https://github.com/seuhong98/industry-university_project/blob/main/Prototype/1.apk)
+### [프로토타입 앱 다운로드 하기](https://github.com/seuhong98/industry-university_project/blob/main/Prototype/OR.apk)
